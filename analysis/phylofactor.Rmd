@@ -1,0 +1,145 @@
+---
+title: "phylofactor"
+author: "fionarhuang"
+date: "2020-06-10"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## Load packages
+
+```{r}
+suppressPackageStartupMessages({
+  library(phylofactor)
+  library(TreeHeatmap)
+  library(ggtree)
+})
+
+```
+
+
+```{r}
+data(FTmicrobiome)
+
+set.seed(1)
+tree <- FTmicrobiome$tree
+species <- sample(tree$tip.label,100)
+tree <- drop.tip(tree,setdiff(tree$tip.label,species))
+taxonomy <- FTmicrobiome$taxonomy
+
+
+# Three selected clades
+clade1 <- phangorn::Descendants(tree,128,'tips')[[1]]
+clade2 <- phangorn::Descendants(tree,186,'tips')[[1]]
+clade3 <- phangorn::Descendants(tree,131,'tips')[[1]]
+
+clade_list <- list("clade1" = clade1,
+                   "clade2" = clade2,
+                   "clade3" = clade3)
+
+clade_list
+lapply(clade_list, length)
+```
+
+The simulated data in `phylofactor`.
+```{r}
+set.seed(1)
+m=length(species)
+n=50 #number of samples
+MetaData <- data.frame('latitude'=runif(n,0,90))
+BodySize <- matrix(rlnorm(m*n),nrow=m)
+rownames(BodySize) <- tree$tip.label # This step is necessary for PhyloFactor
+for (spp in clade1){
+BodySize[spp,] <- rlnorm(n,meanlog=MetaData$latitude/15)
+}
+for (spp in clade2){
+BodySize[spp,] <- rlnorm(n,meanlog=-MetaData$latitude/10)
+}
+for (spp in clade3){
+BodySize[spp,] <- rlnorm(n,meanlog=MetaData$latitude/30)
+}
+```
+
+It seems more reasonable to shff
+```{r}
+set.seed(1)
+m=length(species)
+n=50 #number of samples
+MetaData <- data.frame('latitude'=runif(n,0,90))
+BodySize <- matrix(rlnorm(m*n),nrow=m)
+rownames(BodySize) <- tree$tip.label # This step is necessary for PhyloFactor
+for (spp in clade1){
+BodySize[spp,] <- rlnorm(n,meanlog=MetaData$latitude/15)
+}
+for (spp in clade2){
+BodySize[spp,] <- rlnorm(n,meanlog=-MetaData$latitude/10)
+}
+for (spp in clade3){
+BodySize[spp,] <- rlnorm(n,meanlog=MetaData$latitude/30)
+}
+```
+
+Viz the simulated data
+
+```{r}
+cols <- viridis::viridis(3)
+pf.heatmap(tree=tree,Data=log(BodySize[,order(MetaData$latitude)]),color=NA)+
+ggtree::geom_hilight(128,fill=cols[1])+
+ggtree::geom_hilight(131,fill=cols[2])+
+ggtree::geom_hilight(186,fill=cols[3])
+```
+
+
+```{r, eval=FALSE}
+logSize <- log(BodySize[,order(MetaData$latitude)]) %>%
+  data.frame()
+
+# tree figure
+pick <- c(128, 186, 131)
+cols <- viridis::viridis(3)
+treeFig <- ggtree(tree, layout = "rectangular", 
+                  branch.length = "none") +
+  geom_hilight(node = pick[1], fill = cols[1], alpha = 0.3) +
+  geom_hilight(node = pick[2], fill = cols[2], alpha = 0.6) +
+  geom_hilight(node = pick[3], fill = cols[3], alpha = 0.3) 
+treeFig
+
+
+treeFig
+TreeHeatmap(tree = tree, tree_fig = treeFig,
+            hm_data = logSize, tree_hm_gap = 0.5) 
+```
+
+
+
+# run `phylofactor`
+```{r}
+pf_PhyloFactor <- PhyloFactor(BodySize,tree,MetaData,
+                              frmla = Data~latitude,
+                              nfactors=3,choice='F')
+
+pf_PhyloFactor
+```
+
+
+```{r}
+s_pf <- summary(pf_PhyloFactor,factor=1)
+plot(s_pf$data$latitude,s_pf$data$Data,pch=16,xlab='latitude',ylab='ILR-size',main='Factor 1')
+lines(s_pf$data$latitude,s_pf$data$fitted.values,col='blue',lwd=2)
+legend('topright',legend=c('Observed','Predicted'),lwd=c(NA,2),pch=c(16,NA),col=c('black','blue'))
+
+
+preds <- predict(pf_PhyloFactor)
+g.orig <- pf.heatmap(pf_PhyloFactor,factors=1:3,
+                     column.order=order(pf_PhyloFactor$X$latitude),
+                     width=3)+
+  ggplot2::ggtitle('Raw Data')
+g.pred <- pf.heatmap(pf_PhyloFactor,factors=1:3,Data=preds,
+                     column.order=order(pf_PhyloFactor$X$latitude),
+                     width=3)+
+  ggplot2::ggtitle('Predicted')
+ggpubr::ggarrange(g.orig,g.pred,ncol=2)
+```
+
+
