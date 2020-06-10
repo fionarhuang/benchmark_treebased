@@ -12,7 +12,6 @@ editor_options:
 ```{r}
 suppressPackageStartupMessages({
   library(phylofactor)
-  library(TreeHeatmap)
   library(ggtree)
 })
 
@@ -61,24 +60,7 @@ BodySize[spp,] <- rlnorm(n,meanlog=MetaData$latitude/30)
 }
 ```
 
-It seems more reasonable to shff
-```{r}
-set.seed(1)
-m=length(species)
-n=50 #number of samples
-MetaData <- data.frame('latitude'=runif(n,0,90))
-BodySize <- matrix(rlnorm(m*n),nrow=m)
-rownames(BodySize) <- tree$tip.label # This step is necessary for PhyloFactor
-for (spp in clade1){
-BodySize[spp,] <- rlnorm(n,meanlog=MetaData$latitude/15)
-}
-for (spp in clade2){
-BodySize[spp,] <- rlnorm(n,meanlog=-MetaData$latitude/10)
-}
-for (spp in clade3){
-BodySize[spp,] <- rlnorm(n,meanlog=MetaData$latitude/30)
-}
-```
+
 
 Viz the simulated data
 
@@ -91,25 +73,7 @@ ggtree::geom_hilight(186,fill=cols[3])
 ```
 
 
-```{r, eval=FALSE}
-logSize <- log(BodySize[,order(MetaData$latitude)]) %>%
-  data.frame()
 
-# tree figure
-pick <- c(128, 186, 131)
-cols <- viridis::viridis(3)
-treeFig <- ggtree(tree, layout = "rectangular", 
-                  branch.length = "none") +
-  geom_hilight(node = pick[1], fill = cols[1], alpha = 0.3) +
-  geom_hilight(node = pick[2], fill = cols[2], alpha = 0.6) +
-  geom_hilight(node = pick[3], fill = cols[3], alpha = 0.3) 
-treeFig
-
-
-treeFig
-TreeHeatmap(tree = tree, tree_fig = treeFig,
-            hm_data = logSize, tree_hm_gap = 0.5) 
-```
 
 
 
