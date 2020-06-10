@@ -1,7 +1,7 @@
-name: "benchmark_treebased"
+name: benchmark_treebased
 output_dir: ../docs
 navbar:
-  title: "benchmark_treebased"
+  title: benchmark_treebased
   left:
   - text: Home
     href: index.html
@@ -9,6 +9,10 @@ navbar:
     href: about.html
   - text: License
     href: license.html
+  right:
+  - icon: fa-github
+    text: Source code
+    href: https://github.com/fionarhuang/benchmark_treebased
 output:
   workflowr::wflow_html:
     toc: yes
