@@ -1,5 +1,3 @@
 # benchmark_treebased
 
-A [workflowr][] project.
-
-[workflowr]: https://github.com/jdblischak/workflowr
+[report](https://htmlpreview.github.io/?https://github.com/fionarhuang/benchmark_treebased/blob/master/docs/phylofactor.html)
