@@ -1,0 +1,184 @@
+---
+title: "SS"
+author: "fionarhuang"
+date: "2020-06-11"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+```{r}
+suppressPackageStartupMessages({
+    library(ggplot2)
+    library(gganimate)
+    library(ggtree)
+    library(dplyr)
+    library(treeclimbR)  
+    library(ape)
+    library(TreeHeatmap)
+    library(ggnewscale)
+    library(cowplot)
+    library(phylofactor)
+})
+```
+
+
+# Data simulation
+
+We simulate a scenario (`SS`) that only two branches on the tree have
+differential abundance (signal) between groups. The data is simulated by
+swapping proportions of two branches, and leaves in the same branch have the
+same fold change.
+
+```{r}
+# generate a random tree
+set.seed(1)
+n <- 100
+tree <- rtree(n)
+# generate a random probility vector  for leaves
+p <- rbeta(n = n, shape1 = 2, shape2 = 5)
+p <- p/sum(p)
+names(p) <- tree$tip.label
+# # simulate counts by sampling from multinomial distribution
+lse <- simMult(pr = p, libSize = 1000, tree = tree,
+               minTip.A = 10, maxTip.A = 20,
+               ratio = 1.5, scenario = "SS",
+               nSam = c(20, 20), pct = 0.6)
+```
+
+# Viz simulated pattern
+
+DA branches are colored in orange or blue. 
+```{r}
+# signal branches
+br <- metadata(lse)$branch
+source("code/viewSim.R")
+treeFig <- viewSim(lse, branch.length = "none",
+                   zoom_scale = 1, size = 1.1)
+treeFig
+```
+
+
+Simulated counts are scaled and displayed in the heatmap
+```{r}
+# counts
+count <- assays(lse)[[1]]
+rownames(count) <- rowLinks(lse)$nodeLab
+
+# scale counts
+scale_count <- t(apply(count, 1, FUN = function(x) {
+    xx <- scale(x)
+    (xx - min(xx))/(max(xx)-min(xx))
+}))
+rownames(scale_count) <- rownames(count)
+colnames(scale_count) <- colnames(count)
+head(scale_count)
+# fig: tree 
+fig_0 <- ggtree(tree, branch.length = "none", layout = "circular") +
+    geom_hilight(node = br$A, fill = "orange", alpha = 0.3) +
+    geom_hilight(node = br$B, fill = "blue", alpha = 0.3) +
+    new_scale_fill()
+# fig: tree + heatmap
+vv <- gsub(pattern = "_.*", "", colnames(count))
+names(vv) <- colnames(scale_count)
+fig <- TreeHeatmap(tree = tree, tree_fig = treeFig, hm_data = scale_count,
+                   column_split = vv, rel_width = 0.5, tree_hm_gap = 0.3) +
+    scale_fill_viridis_c(option = "B")
+fig
+```
+
+
+# run `PhyloFactor`
+
+```{r,fig.height=8}
+# count <- assays(lse)[[1]]
+# rownames(count) <- rowLinks(lse)$nodeLab
+site <- colData(lse)$group
+```
+
+```{r, cache=TRUE}
+pf_5 <- PhyloFactor(count, tree, site, nfactors= 5)
+f_5 <- pf.tree(pf_5,layout='rectangular', branch.length = "none")$ggplot
+
+
+pf_10 <- PhyloFactor(count, tree, site, nfactors= 10)
+f_10 <- pf.tree(pf_10,layout='rectangular', branch.length = "none")$ggplot
+
+pf_50 <- PhyloFactor(count, tree, site, nfactors= 50)
+f_50 <- pf.tree(pf_10,layout='rectangular', branch.length = "none")$ggplot
+
+pf_NULL <- PhyloFactor(count, tree, site, nfactors= NULL)
+f_NULL <- pf.tree(pf_NULL,layout='rectangular', branch.length = "none")$ggplot
+
+# summary(pf_PhyloFactor,factor=1)
+# pf_PhyloFactor$factors
+```
+
+# Truth vs phylofactor
+```{r,fig.height=6, fig.width=12}
+plot_grid(treeFig, f_5, f_10, f_50, f_NULL, 
+          nrow = 1, 
+          labels = c("Truth", "nf = 5", "nf = 10", "nf = 50", "nf = NULL"), 
+          label_size = 7)
+
+```
+
+
+# run treeclimbR
+
+## data aggregation
+```{r}
+all_node <- showNode(tree = rowTree(lse), only.leaf = FALSE)
+tse <- aggValue(x = lse, rowLevel = all_node)
+colData(tse)
+```
+
+## differential analysis
+
+```{r}
+res <- runDA(TSE = tse, feature_on_row = TRUE, 
+             filter_min_count = 0, 
+             design_terms = "group", normalize = FALSE)
+out <- nodeResult(object = res, n = Inf)
+head(out)
+dim(out)
+```
+
+# Run `treeclimbR`
+```{r}
+# treeclimbR
+cand <- getCand(tree = rowTree(tse), score_data = out, 
+                node_column = "node", p_column = "PValue",
+                sign_column = "logFC", message = TRUE)
+
+best <- evalCand(tree = rowTree(tse), levels = cand$candidate_list, 
+                 score_data = out, node_column = "node",
+                 sign_column = "logFC",
+                 p_column = "PValue")
+infoCand(best)
+
+
+```
+
+
+## result
+
+```{r}
+# the detected nodes
+loc <- best$output[best$output$signal.node, ][["node"]]
+loc
+
+fig_climb <- treeFig +
+  geom_point2(aes(subset = (node %in% loc)), color = "red", size = 2) +
+  theme(legend.position = "none")
+```
+
+
+# Truth vs phylofactor vs treeclimbR
+```{r,fig.height=6, fig.width=12}
+plot_grid(treeFig, fig_climb, f_5, f_10, f_50, f_NULL, 
+          nrow = 1, 
+          labels = c("Truth", "treeclimbR", "nf = 5", "nf = 10", "nf = 50", "nf = NULL"), 
+          label_size = 9)
+
+```
