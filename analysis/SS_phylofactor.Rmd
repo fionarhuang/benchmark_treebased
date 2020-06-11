@@ -48,7 +48,7 @@ lse <- simMult(pr = p, libSize = 1000, tree = tree,
 
 # Viz simulated pattern
 
-DA branches are colored in orange or blue. 
+DA branches are colored in orange or blue. Simulated counts are scaled and displayed in the heatmap
 ```{r}
 # signal branches
 br <- metadata(lse)$branch
@@ -56,11 +56,7 @@ source("code/viewSim.R")
 treeFig <- viewSim(lse, branch.length = "none",
                    zoom_scale = 1, size = 1.1)
 treeFig
-```
 
-
-Simulated counts are scaled and displayed in the heatmap
-```{r}
 # counts
 count <- assays(lse)[[1]]
 rownames(count) <- rowLinks(lse)$nodeLab

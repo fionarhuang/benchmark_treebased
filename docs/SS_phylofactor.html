@@ -436,7 +436,7 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 </div>
 <div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown is untracked by Git. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -509,10 +509,10 @@ unnamed-chunk-6
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfionarhuangbenchmarktreebasedtree9991321b7b46916e338ec81e56d1c6228ead934ftargetblank9991321a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fionarhuang/benchmark_treebased/tree/9991321b7b46916e338ec81e56d1c6228ead934f" target="_blank">9991321</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfionarhuangbenchmarktreebasedtree8c76f0dcdc0b052c7eacdc7157a0324befa3629ctargetblank8c76f0da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fionarhuang/benchmark_treebased/tree/8c76f0dcdc0b052c7eacdc7157a0324befa3629c" target="_blank">8c76f0d</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfionarhuangbenchmarktreebasedtree9991321b7b46916e338ec81e56d1c6228ead934ftargetblank9991321a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfionarhuangbenchmarktreebasedtree8c76f0dcdc0b052c7eacdc7157a0324befa3629ctargetblank8c76f0da" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -528,12 +528,12 @@ Untracked files:
     Untracked:  analysis/2_phylofactor.Rmd
     Untracked:  analysis/3_phylofactor.Rmd
     Untracked:  analysis/4_phylofactor.Rmd
-    Untracked:  analysis/SS_phylofactor.Rmd
     Untracked:  analysis/toy_phylofactor.Rmd
     Untracked:  code/viewSim.R
     Untracked:  output/viewSim.R
 
 Unstaged changes:
+    Modified:   analysis/SS_phylofactor.Rmd
     Modified:   analysis/phylofactor.Rmd
 
 </code></pre>
@@ -547,9 +547,69 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <hr>
 </div>
 <div id="versions" class="tab-pane fade">
+
 <p>
-There are no past versions. Publish this analysis with <code>wflow_publish()</code> to start tracking its development.
+These are the previous versions of the R Markdown and HTML files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view them.
 </p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/fionarhuang/benchmark_treebased/blob/c0226fede837307f2dae3fbabbc104b1c7eb60c6/analysis/SS_phylofactor.Rmd" target="_blank">c0226fe</a>
+</td>
+<td>
+fionarhuang
+</td>
+<td>
+2020-06-11
+</td>
+<td>
+upload ss_phylofactor file
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fionarhuang/benchmark_treebased/c0226fede837307f2dae3fbabbc104b1c7eb60c6/docs/SS_phylofactor.html" target="_blank">c0226fe</a>
+</td>
+<td>
+fionarhuang
+</td>
+<td>
+2020-06-11
+</td>
+<td>
+upload ss_phylofactor file
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 <hr>
 </div>
 </div>
@@ -585,7 +645,7 @@ lse &lt;- simMult(pr = p, libSize = 1000, tree = tree,
 </div>
 <div id="viz-simulated-pattern" class="section level1">
 <h1>Viz simulated pattern</h1>
-<p>DA branches are colored in orange or blue.</p>
+<p>DA branches are colored in orange or blue. Simulated counts are scaled and displayed in the heatmap</p>
 <pre class="r"><code># signal branches
 br &lt;- metadata(lse)$branch
 source(&quot;code/viewSim.R&quot;)
@@ -593,7 +653,43 @@ treeFig &lt;- viewSim(lse, branch.length = &quot;none&quot;,
                    zoom_scale = 1, size = 1.1)
 treeFig</code></pre>
 <p><img src="figure/SS_phylofactor.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>Simulated counts are scaled and displayed in the heatmap</p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-1">
+Past versions of unnamed-chunk-3-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-3-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fionarhuang/benchmark_treebased/blob/c0226fede837307f2dae3fbabbc104b1c7eb60c6/docs/figure/SS_phylofactor.Rmd/unnamed-chunk-3-1.png" target="_blank">c0226fe</a>
+</td>
+<td>
+fionarhuang
+</td>
+<td>
+2020-06-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># counts
 count &lt;- assays(lse)[[1]]
 rownames(count) &lt;- rowLinks(lse)$nodeLab
@@ -662,7 +758,7 @@ fig &lt;- TreeHeatmap(tree = tree, tree_fig = treeFig, hm_data = scale_count,
 <pre><code>Scale for &#39;fill&#39; is already present. Adding another scale for &#39;fill&#39;, which
 will replace the existing scale.</code></pre>
 <pre class="r"><code>fig</code></pre>
-<p><img src="figure/SS_phylofactor.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/SS_phylofactor.Rmd/unnamed-chunk-3-2.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="run-phylofactor" class="section level1">
 <h1>run <code>PhyloFactor</code></h1>
@@ -674,15 +770,15 @@ site &lt;- colData(lse)$group</code></pre>
 receive default modification of zeros. Zeros will be replaced column wise with
 delta*min(x[x&gt;0]), default delta=0.65</code></pre>
 <pre><code>
- 1 factor completed in 0.0219 minutes.    Estimated time of completion: 2020-06-11 08:36:13   
+ 1 factor completed in 0.0346 minutes.    Estimated time of completion: 2020-06-11 09:02:24   
 
- 2 factors completed in 0.0426 minutes.     Estimated time of completion: 2020-06-11 08:36:12   
+ 2 factors completed in 0.0681 minutes.     Estimated time of completion: 2020-06-11 09:02:24   
 
- 3 factors completed in 0.0642 minutes.     Estimated time of completion: 2020-06-11 08:36:12   
+ 3 factors completed in 0.0985 minutes.     Estimated time of completion: 2020-06-11 09:02:23   
 
- 4 factors completed in 0.085 minutes.     Estimated time of completion: 2020-06-11 08:36:12   
+ 4 factors completed in 0.132 minutes.     Estimated time of completion: 2020-06-11 09:02:23   
 
- 5 factors completed in 0.107 minutes.     Estimated time of completion: 2020-06-11 08:36:12   </code></pre>
+ 5 factors completed in 0.165 minutes.     Estimated time of completion: 2020-06-11 09:02:23   </code></pre>
 <pre class="r"><code>f_5 &lt;- pf.tree(pf_5,layout=&#39;rectangular&#39;, branch.length = &quot;none&quot;)$ggplot</code></pre>
 <pre><code>Warning: Ignoring unknown parameters: branch.length</code></pre>
 <pre><code>Warning: Ignoring unknown parameters: branch.length</code></pre>
@@ -691,25 +787,25 @@ delta*min(x[x&gt;0]), default delta=0.65</code></pre>
 will receive default modification of zeros. Zeros will be replaced column wise
 with delta*min(x[x&gt;0]), default delta=0.65</code></pre>
 <pre><code>
- 1 factor completed in 0.022 minutes.    Estimated time of completion: 2020-06-11 08:36:26   
+ 1 factor completed in 0.0323 minutes.    Estimated time of completion: 2020-06-11 09:02:44   
 
- 2 factors completed in 0.0436 minutes.     Estimated time of completion: 2020-06-11 08:36:26   
+ 2 factors completed in 0.0653 minutes.     Estimated time of completion: 2020-06-11 09:02:44   
 
- 3 factors completed in 0.0653 minutes.     Estimated time of completion: 2020-06-11 08:36:26   
+ 3 factors completed in 0.0972 minutes.     Estimated time of completion: 2020-06-11 09:02:44   
 
- 4 factors completed in 0.0867 minutes.     Estimated time of completion: 2020-06-11 08:36:26   
+ 4 factors completed in 0.128 minutes.     Estimated time of completion: 2020-06-11 09:02:43   
 
- 5 factors completed in 0.107 minutes.     Estimated time of completion: 2020-06-11 08:36:26   
+ 5 factors completed in 0.16 minutes.     Estimated time of completion: 2020-06-11 09:02:43   
 
- 6 factors completed in 0.129 minutes.     Estimated time of completion: 2020-06-11 08:36:26   
+ 6 factors completed in 0.191 minutes.     Estimated time of completion: 2020-06-11 09:02:43   
 
- 7 factors completed in 0.151 minutes.     Estimated time of completion: 2020-06-11 08:36:26   
+ 7 factors completed in 0.221 minutes.     Estimated time of completion: 2020-06-11 09:02:43   
 
- 8 factors completed in 0.173 minutes.     Estimated time of completion: 2020-06-11 08:36:26   
+ 8 factors completed in 0.253 minutes.     Estimated time of completion: 2020-06-11 09:02:43   
 
- 9 factors completed in 0.197 minutes.     Estimated time of completion: 2020-06-11 08:36:26   
+ 9 factors completed in 0.283 minutes.     Estimated time of completion: 2020-06-11 09:02:43   
 
- 10 factors completed in 0.218 minutes.     Estimated time of completion: 2020-06-11 08:36:26   </code></pre>
+ 10 factors completed in 0.313 minutes.     Estimated time of completion: 2020-06-11 09:02:43   </code></pre>
 <pre class="r"><code>f_10 &lt;- pf.tree(pf_10,layout=&#39;rectangular&#39;, branch.length = &quot;none&quot;)$ggplot</code></pre>
 <pre><code>Warning: Ignoring unknown parameters: branch.length
 
@@ -719,105 +815,105 @@ Warning: Ignoring unknown parameters: branch.length</code></pre>
 will receive default modification of zeros. Zeros will be replaced column wise
 with delta*min(x[x&gt;0]), default delta=0.65</code></pre>
 <pre><code>
- 1 factor completed in 0.0221 minutes.    Estimated time of completion: 2020-06-11 08:37:33   
+ 1 factor completed in 0.0338 minutes.    Estimated time of completion: 2020-06-11 09:04:25   
 
- 2 factors completed in 0.0444 minutes.     Estimated time of completion: 2020-06-11 08:37:33   
+ 2 factors completed in 0.0692 minutes.     Estimated time of completion: 2020-06-11 09:04:27   
 
- 3 factors completed in 0.0665 minutes.     Estimated time of completion: 2020-06-11 08:37:33   
+ 3 factors completed in 0.102 minutes.     Estimated time of completion: 2020-06-11 09:04:26   
 
- 4 factors completed in 0.0885 minutes.     Estimated time of completion: 2020-06-11 08:37:33   
+ 4 factors completed in 0.133 minutes.     Estimated time of completion: 2020-06-11 09:04:24   
 
- 5 factors completed in 0.11 minutes.     Estimated time of completion: 2020-06-11 08:37:33   
+ 5 factors completed in 0.17 minutes.     Estimated time of completion: 2020-06-11 09:04:25   
 
- 6 factors completed in 0.131 minutes.     Estimated time of completion: 2020-06-11 08:37:32   
+ 6 factors completed in 0.205 minutes.     Estimated time of completion: 2020-06-11 09:04:26   
 
- 7 factors completed in 0.152 minutes.     Estimated time of completion: 2020-06-11 08:37:32   
+ 7 factors completed in 0.236 minutes.     Estimated time of completion: 2020-06-11 09:04:25   
 
- 8 factors completed in 0.174 minutes.     Estimated time of completion: 2020-06-11 08:37:32   
+ 8 factors completed in 0.266 minutes.     Estimated time of completion: 2020-06-11 09:04:23   
 
- 9 factors completed in 0.195 minutes.     Estimated time of completion: 2020-06-11 08:37:32   
+ 9 factors completed in 0.297 minutes.     Estimated time of completion: 2020-06-11 09:04:22   
 
- 10 factors completed in 0.216 minutes.     Estimated time of completion: 2020-06-11 08:37:32   
+ 10 factors completed in 0.327 minutes.     Estimated time of completion: 2020-06-11 09:04:22   
 
- 11 factors completed in 0.238 minutes.     Estimated time of completion: 2020-06-11 08:37:32   
+ 11 factors completed in 0.357 minutes.     Estimated time of completion: 2020-06-11 09:04:21   
 
- 12 factors completed in 0.259 minutes.     Estimated time of completion: 2020-06-11 08:37:32   
+ 12 factors completed in 0.387 minutes.     Estimated time of completion: 2020-06-11 09:04:20   
 
- 13 factors completed in 0.281 minutes.     Estimated time of completion: 2020-06-11 08:37:31   
+ 13 factors completed in 0.417 minutes.     Estimated time of completion: 2020-06-11 09:04:20   
 
- 14 factors completed in 0.301 minutes.     Estimated time of completion: 2020-06-11 08:37:31   
+ 14 factors completed in 0.446 minutes.     Estimated time of completion: 2020-06-11 09:04:19   
 
- 15 factors completed in 0.322 minutes.     Estimated time of completion: 2020-06-11 08:37:31   
+ 15 factors completed in 0.477 minutes.     Estimated time of completion: 2020-06-11 09:04:19   
 
- 16 factors completed in 0.341 minutes.     Estimated time of completion: 2020-06-11 08:37:31   
+ 16 factors completed in 0.508 minutes.     Estimated time of completion: 2020-06-11 09:04:19   
 
- 17 factors completed in 0.361 minutes.     Estimated time of completion: 2020-06-11 08:37:30   
+ 17 factors completed in 0.537 minutes.     Estimated time of completion: 2020-06-11 09:04:18   
 
- 18 factors completed in 0.381 minutes.     Estimated time of completion: 2020-06-11 08:37:30   
+ 18 factors completed in 0.565 minutes.     Estimated time of completion: 2020-06-11 09:04:18   
 
- 19 factors completed in 0.401 minutes.     Estimated time of completion: 2020-06-11 08:37:30   
+ 19 factors completed in 0.593 minutes.     Estimated time of completion: 2020-06-11 09:04:17   
 
- 20 factors completed in 0.42 minutes.     Estimated time of completion: 2020-06-11 08:37:30   
+ 20 factors completed in 0.62 minutes.     Estimated time of completion: 2020-06-11 09:04:17   
 
- 21 factors completed in 0.439 minutes.     Estimated time of completion: 2020-06-11 08:37:29   
+ 21 factors completed in 0.646 minutes.     Estimated time of completion: 2020-06-11 09:04:16   
 
- 22 factors completed in 0.458 minutes.     Estimated time of completion: 2020-06-11 08:37:29   
+ 22 factors completed in 0.673 minutes.     Estimated time of completion: 2020-06-11 09:04:15   
 
- 23 factors completed in 0.476 minutes.     Estimated time of completion: 2020-06-11 08:37:29   
+ 23 factors completed in 0.7 minutes.     Estimated time of completion: 2020-06-11 09:04:15   
 
- 24 factors completed in 0.495 minutes.     Estimated time of completion: 2020-06-11 08:37:29   
+ 24 factors completed in 0.73 minutes.     Estimated time of completion: 2020-06-11 09:04:15   
 
- 25 factors completed in 0.513 minutes.     Estimated time of completion: 2020-06-11 08:37:28   
+ 25 factors completed in 0.758 minutes.     Estimated time of completion: 2020-06-11 09:04:15   
 
- 26 factors completed in 0.531 minutes.     Estimated time of completion: 2020-06-11 08:37:28   
+ 26 factors completed in 0.786 minutes.     Estimated time of completion: 2020-06-11 09:04:14   
 
- 27 factors completed in 0.549 minutes.     Estimated time of completion: 2020-06-11 08:37:28   
+ 27 factors completed in 0.812 minutes.     Estimated time of completion: 2020-06-11 09:04:14   
 
- 28 factors completed in 0.568 minutes.     Estimated time of completion: 2020-06-11 08:37:28   
+ 28 factors completed in 0.839 minutes.     Estimated time of completion: 2020-06-11 09:04:14   
 
- 29 factors completed in 0.586 minutes.     Estimated time of completion: 2020-06-11 08:37:27   
+ 29 factors completed in 0.867 minutes.     Estimated time of completion: 2020-06-11 09:04:13   
 
- 30 factors completed in 0.603 minutes.     Estimated time of completion: 2020-06-11 08:37:27   
+ 30 factors completed in 0.896 minutes.     Estimated time of completion: 2020-06-11 09:04:13   
 
- 31 factors completed in 0.621 minutes.     Estimated time of completion: 2020-06-11 08:37:27   
+ 31 factors completed in 0.922 minutes.     Estimated time of completion: 2020-06-11 09:04:13   
 
- 32 factors completed in 0.639 minutes.     Estimated time of completion: 2020-06-11 08:37:27   
+ 32 factors completed in 0.946 minutes.     Estimated time of completion: 2020-06-11 09:04:12   
 
- 33 factors completed in 0.656 minutes.     Estimated time of completion: 2020-06-11 08:37:26   
+ 33 factors completed in 0.971 minutes.     Estimated time of completion: 2020-06-11 09:04:12   
 
- 34 factors completed in 0.673 minutes.     Estimated time of completion: 2020-06-11 08:37:26   
+ 34 factors completed in 0.995 minutes.     Estimated time of completion: 2020-06-11 09:04:11   
 
- 35 factors completed in 0.69 minutes.     Estimated time of completion: 2020-06-11 08:37:26   
+ 35 factors completed in 1.02 minutes.     Estimated time of completion: 2020-06-11 09:04:11   
 
- 36 factors completed in 0.706 minutes.     Estimated time of completion: 2020-06-11 08:37:26   
+ 36 factors completed in 1.04 minutes.     Estimated time of completion: 2020-06-11 09:04:10   
 
- 37 factors completed in 0.724 minutes.     Estimated time of completion: 2020-06-11 08:37:25   
+ 37 factors completed in 1.06 minutes.     Estimated time of completion: 2020-06-11 09:04:10   
 
- 38 factors completed in 0.741 minutes.     Estimated time of completion: 2020-06-11 08:37:25   
+ 38 factors completed in 1.09 minutes.     Estimated time of completion: 2020-06-11 09:04:09   
 
- 39 factors completed in 0.758 minutes.     Estimated time of completion: 2020-06-11 08:37:25   
+ 39 factors completed in 1.11 minutes.     Estimated time of completion: 2020-06-11 09:04:09   
 
- 40 factors completed in 0.774 minutes.     Estimated time of completion: 2020-06-11 08:37:25   
+ 40 factors completed in 1.13 minutes.     Estimated time of completion: 2020-06-11 09:04:09   
 
- 41 factors completed in 0.791 minutes.     Estimated time of completion: 2020-06-11 08:37:25   
+ 41 factors completed in 1.16 minutes.     Estimated time of completion: 2020-06-11 09:04:08   
 
- 42 factors completed in 0.807 minutes.     Estimated time of completion: 2020-06-11 08:37:24   
+ 42 factors completed in 1.18 minutes.     Estimated time of completion: 2020-06-11 09:04:08   
 
- 43 factors completed in 0.824 minutes.     Estimated time of completion: 2020-06-11 08:37:24   
+ 43 factors completed in 1.2 minutes.     Estimated time of completion: 2020-06-11 09:04:07   
 
- 44 factors completed in 0.84 minutes.     Estimated time of completion: 2020-06-11 08:37:24   
+ 44 factors completed in 1.22 minutes.     Estimated time of completion: 2020-06-11 09:04:07   
 
- 45 factors completed in 0.856 minutes.     Estimated time of completion: 2020-06-11 08:37:24   
+ 45 factors completed in 1.24 minutes.     Estimated time of completion: 2020-06-11 09:04:06   
 
- 46 factors completed in 0.871 minutes.     Estimated time of completion: 2020-06-11 08:37:24   
+ 46 factors completed in 1.26 minutes.     Estimated time of completion: 2020-06-11 09:04:06   
 
- 47 factors completed in 0.887 minutes.     Estimated time of completion: 2020-06-11 08:37:23   
+ 47 factors completed in 1.28 minutes.     Estimated time of completion: 2020-06-11 09:04:05   
 
- 48 factors completed in 0.902 minutes.     Estimated time of completion: 2020-06-11 08:37:23   
+ 48 factors completed in 1.3 minutes.     Estimated time of completion: 2020-06-11 09:04:05   
 
- 49 factors completed in 0.917 minutes.     Estimated time of completion: 2020-06-11 08:37:23   
+ 49 factors completed in 1.32 minutes.     Estimated time of completion: 2020-06-11 09:04:05   
 
- 50 factors completed in 0.932 minutes.     Estimated time of completion: 2020-06-11 08:37:23   </code></pre>
+ 50 factors completed in 1.34 minutes.     Estimated time of completion: 2020-06-11 09:04:04   </code></pre>
 <pre class="r"><code>f_50 &lt;- pf.tree(pf_10,layout=&#39;rectangular&#39;, branch.length = &quot;none&quot;)$ggplot</code></pre>
 <pre><code>Warning: Ignoring unknown parameters: branch.length
 
@@ -827,211 +923,203 @@ Warning: Ignoring unknown parameters: branch.length</code></pre>
 will receive default modification of zeros. Zeros will be replaced column wise
 with delta*min(x[x&gt;0]), default delta=0.65</code></pre>
 <pre><code>
- 1 factor completed in 0.0217 minutes.    Estimated time of completion: at latest 2020-06-11 08:39:34   
+ 1 factor completed in 0.0335 minutes.    Estimated time of completion: at latest 2020-06-11 09:07:26   
 
- 2 factors completed in 0.0429 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:32   
+ 2 factors completed in 0.065 minutes.     Estimated time of completion: at latest 2020-06-11 09:07:20   
 
- 3 factors completed in 0.0647 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:33   
+ 3 factors completed in 0.096 minutes.     Estimated time of completion: at latest 2020-06-11 09:07:17   
 
- 4 factors completed in 0.0878 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:35   
+ 4 factors completed in 0.126 minutes.     Estimated time of completion: at latest 2020-06-11 09:07:14   
 
- 5 factors completed in 0.109 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:34   
+ 5 factors completed in 0.157 minutes.     Estimated time of completion: at latest 2020-06-11 09:07:14   
 
- 6 factors completed in 0.131 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:35   
+ 6 factors completed in 0.188 minutes.     Estimated time of completion: at latest 2020-06-11 09:07:13   
 
- 7 factors completed in 0.155 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:36   
+ 7 factors completed in 0.219 minutes.     Estimated time of completion: at latest 2020-06-11 09:07:13   
 
- 8 factors completed in 0.176 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:36   
+ 8 factors completed in 0.25 minutes.     Estimated time of completion: at latest 2020-06-11 09:07:13   
 
- 9 factors completed in 0.197 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:35   
+ 9 factors completed in 0.28 minutes.     Estimated time of completion: at latest 2020-06-11 09:07:12   
 
- 10 factors completed in 0.218 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:34   
+ 10 factors completed in 0.31 minutes.     Estimated time of completion: at latest 2020-06-11 09:07:11   
 
- 11 factors completed in 0.238 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:33   
+ 11 factors completed in 0.339 minutes.     Estimated time of completion: at latest 2020-06-11 09:07:10   
 
- 12 factors completed in 0.26 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:33   
+ 12 factors completed in 0.368 minutes.     Estimated time of completion: at latest 2020-06-11 09:07:09   
 
- 13 factors completed in 0.282 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:34   
+ 13 factors completed in 0.397 minutes.     Estimated time of completion: at latest 2020-06-11 09:07:08   
 
- 14 factors completed in 0.303 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:33   
+ 14 factors completed in 0.426 minutes.     Estimated time of completion: at latest 2020-06-11 09:07:07   
 
- 15 factors completed in 0.325 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:33   
+ 15 factors completed in 0.455 minutes.     Estimated time of completion: at latest 2020-06-11 09:07:07   
 
- 16 factors completed in 0.345 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:33   
+ 16 factors completed in 0.483 minutes.     Estimated time of completion: at latest 2020-06-11 09:07:06   
 
- 17 factors completed in 0.365 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:32   
+ 17 factors completed in 0.511 minutes.     Estimated time of completion: at latest 2020-06-11 09:07:05   
 
- 18 factors completed in 0.385 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:32   
+ 18 factors completed in 0.539 minutes.     Estimated time of completion: at latest 2020-06-11 09:07:05   
 
- 19 factors completed in 0.405 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:31   
+ 19 factors completed in 0.566 minutes.     Estimated time of completion: at latest 2020-06-11 09:07:04   
 
- 20 factors completed in 0.424 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:31   
+ 20 factors completed in 0.593 minutes.     Estimated time of completion: at latest 2020-06-11 09:07:03   
 
- 21 factors completed in 0.444 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:30   
+ 21 factors completed in 0.62 minutes.     Estimated time of completion: at latest 2020-06-11 09:07:02   
 
- 22 factors completed in 0.463 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:29   
+ 22 factors completed in 0.648 minutes.     Estimated time of completion: at latest 2020-06-11 09:07:02   
 
- 23 factors completed in 0.481 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:29   
+ 23 factors completed in 0.674 minutes.     Estimated time of completion: at latest 2020-06-11 09:07:01   
 
- 24 factors completed in 0.501 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:28   
+ 24 factors completed in 0.701 minutes.     Estimated time of completion: at latest 2020-06-11 09:07:00   
 
- 25 factors completed in 0.519 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:28   
+ 25 factors completed in 0.727 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:59   
 
- 26 factors completed in 0.538 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:27   
+ 26 factors completed in 0.752 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:59   
 
- 27 factors completed in 0.556 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:27   
+ 27 factors completed in 0.778 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:58   
 
- 28 factors completed in 0.574 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:26   
+ 28 factors completed in 0.803 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:57   
 
- 29 factors completed in 0.592 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:26   
+ 29 factors completed in 0.828 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:56   
 
- 30 factors completed in 0.609 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:25   
+ 30 factors completed in 0.852 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:55   
 
- 31 factors completed in 0.627 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:25   
+ 31 factors completed in 0.878 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:55   
 
- 32 factors completed in 0.644 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:24   
+ 32 factors completed in 0.902 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:54   
 
- 33 factors completed in 0.662 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:24   
+ 33 factors completed in 0.927 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:53   
 
- 34 factors completed in 0.679 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:23   
+ 34 factors completed in 0.951 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:53   
 
- 35 factors completed in 0.698 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:23   
+ 35 factors completed in 0.974 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:52   
 
- 36 factors completed in 0.715 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:22   
+ 36 factors completed in 0.998 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:51   
 
- 37 factors completed in 0.731 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:22   
+ 37 factors completed in 1.02 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:50   
 
- 38 factors completed in 0.749 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:21   
+ 38 factors completed in 1.04 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:50   
 
- 39 factors completed in 0.765 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:21   
+ 39 factors completed in 1.07 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:49   
 
- 40 factors completed in 0.781 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:20   
+ 40 factors completed in 1.09 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:48   
 
- 41 factors completed in 0.797 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:20   
+ 41 factors completed in 1.11 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:48   
 
- 42 factors completed in 0.813 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:19   
+ 42 factors completed in 1.13 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:47   
 
- 43 factors completed in 0.829 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:19   
+ 43 factors completed in 1.15 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:46   
 
- 44 factors completed in 0.845 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:18   
+ 44 factors completed in 1.18 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:45   
 
- 45 factors completed in 0.861 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:18   
+ 45 factors completed in 1.2 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:45   
 
- 46 factors completed in 0.876 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:18   
+ 46 factors completed in 1.22 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:44   
 
- 47 factors completed in 0.893 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:17   
+ 47 factors completed in 1.24 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:43   
 
- 48 factors completed in 0.908 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:17   
+ 48 factors completed in 1.26 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:42   
 
- 49 factors completed in 0.923 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:16   
+ 49 factors completed in 1.28 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:42   
 
- 50 factors completed in 0.938 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:16   
+ 50 factors completed in 1.3 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:41   
 
- 51 factors completed in 0.953 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:15   
+ 51 factors completed in 1.32 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:40   
 
- 52 factors completed in 0.968 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:15   </code></pre>
-<pre><code>Warning in PhyloRegression(TransformedData, X, frmla, Grps, contrast.fcn, :
-Objective function produced 2 identical groups. Will choose group at random.</code></pre>
-<pre><code>
- 53 factors completed in 0.983 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:14   
+ 52 factors completed in 1.34 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:39   
 
- 54 factors completed in 0.997 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:14   
+ 53 factors completed in 1.36 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:39   
 
- 55 factors completed in 1.01 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:14   
+ 54 factors completed in 1.38 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:38   
 
- 56 factors completed in 1.03 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:13   
+ 55 factors completed in 1.39 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:37   
 
- 57 factors completed in 1.04 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:13   
+ 56 factors completed in 1.41 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:36   
 
- 58 factors completed in 1.06 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:12   
+ 57 factors completed in 1.43 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:36   
 
- 59 factors completed in 1.07 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:12   
+ 58 factors completed in 1.45 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:35   
 
- 60 factors completed in 1.08 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:12   </code></pre>
-<pre><code>Warning in PhyloRegression(TransformedData, X, frmla, Grps, contrast.fcn, :
-Objective function produced 2 identical groups. Will choose group at random.</code></pre>
-<pre><code>
- 61 factors completed in 1.1 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:11   
+ 59 factors completed in 1.47 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:34   
 
- 62 factors completed in 1.11 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:11   
+ 60 factors completed in 1.49 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:33   
 
- 63 factors completed in 1.13 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:10   
+ 61 factors completed in 1.5 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:33   
 
- 64 factors completed in 1.14 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:10   
+ 62 factors completed in 1.52 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:32   
 
- 65 factors completed in 1.15 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:10   
+ 63 factors completed in 1.54 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:32   
 
- 66 factors completed in 1.16 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:09   
+ 64 factors completed in 1.56 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:31   
 
- 67 factors completed in 1.18 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:09   
+ 65 factors completed in 1.57 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:30   
 
- 68 factors completed in 1.19 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:08   
+ 66 factors completed in 1.59 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:29   
 
- 69 factors completed in 1.2 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:08   </code></pre>
-<pre><code>Warning in PhyloRegression(TransformedData, X, frmla, Grps, contrast.fcn, :
-Objective function produced 2 identical groups. Will choose group at random.</code></pre>
-<pre><code>
- 70 factors completed in 1.22 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:08   
+ 67 factors completed in 1.6 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:29   
 
- 71 factors completed in 1.23 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:07   </code></pre>
-<pre><code>Warning in PhyloRegression(TransformedData, X, frmla, Grps, contrast.fcn, :
-Objective function produced 2 identical groups. Will choose group at random.</code></pre>
-<pre><code>
- 72 factors completed in 1.24 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:07   
+ 68 factors completed in 1.62 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:28   
 
- 73 factors completed in 1.25 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:06   
+ 69 factors completed in 1.64 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:27   
 
- 74 factors completed in 1.27 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:06   
+ 70 factors completed in 1.65 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:26   
 
- 75 factors completed in 1.28 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:06   
+ 71 factors completed in 1.67 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:26   
 
- 76 factors completed in 1.29 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:05   
+ 72 factors completed in 1.68 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:25   
 
- 77 factors completed in 1.3 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:05   
+ 73 factors completed in 1.7 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:24   
 
- 78 factors completed in 1.32 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:04   
+ 74 factors completed in 1.71 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:24   
 
- 79 factors completed in 1.33 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:04   
+ 75 factors completed in 1.73 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:23   
 
- 80 factors completed in 1.34 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:04   
+ 76 factors completed in 1.74 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:23   
 
- 81 factors completed in 1.35 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:03   
+ 77 factors completed in 1.76 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:22   
 
- 82 factors completed in 1.36 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:03   
+ 78 factors completed in 1.77 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:21   
 
- 83 factors completed in 1.37 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:02   
+ 79 factors completed in 1.79 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:21   
 
- 84 factors completed in 1.39 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:02   
+ 80 factors completed in 1.8 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:20   
 
- 85 factors completed in 1.4 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:02   
+ 81 factors completed in 1.81 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:19   
 
- 86 factors completed in 1.41 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:02   
+ 82 factors completed in 1.83 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:19   
 
- 87 factors completed in 1.42 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:01   
+ 83 factors completed in 1.84 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:18   
 
- 88 factors completed in 1.43 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:01   
+ 84 factors completed in 1.85 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:17   
 
- 89 factors completed in 1.44 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:01   
+ 85 factors completed in 1.87 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:17   
 
- 90 factors completed in 1.45 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:00   
+ 86 factors completed in 1.88 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:16   
 
- 91 factors completed in 1.47 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:00   
+ 87 factors completed in 1.89 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:15   
 
- 92 factors completed in 1.48 minutes.     Estimated time of completion: at latest 2020-06-11 08:39:00   
+ 88 factors completed in 1.9 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:15   
 
- 93 factors completed in 1.49 minutes.     Estimated time of completion: at latest 2020-06-11 08:38:59   
+ 89 factors completed in 1.91 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:14   
 
- 94 factors completed in 1.5 minutes.     Estimated time of completion: at latest 2020-06-11 08:38:59   
+ 90 factors completed in 1.93 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:13   
 
- 95 factors completed in 1.51 minutes.     Estimated time of completion: at latest 2020-06-11 08:38:58   
+ 91 factors completed in 1.94 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:13   
 
- 96 factors completed in 1.52 minutes.     Estimated time of completion: at latest 2020-06-11 08:38:58   
+ 92 factors completed in 1.95 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:12   
 
- 97 factors completed in 1.53 minutes.     Estimated time of completion: at latest 2020-06-11 08:38:58   
+ 93 factors completed in 1.96 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:11   
 
- 98 factors completed in 1.53 minutes.     Estimated time of completion: at latest 2020-06-11 08:38:57   
+ 94 factors completed in 1.97 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:11   
 
- 99 factors completed in 1.54 minutes.     Estimated time of completion: at latest 2020-06-11 08:38:57   </code></pre>
+ 95 factors completed in 1.98 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:10   
+
+ 96 factors completed in 1.99 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:09   
+
+ 97 factors completed in 2 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:08   
+
+ 98 factors completed in 2.01 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:08   
+
+ 99 factors completed in 2.01 minutes.     Estimated time of completion: at latest 2020-06-11 09:06:07   </code></pre>
 <pre class="r"><code>f_NULL &lt;- pf.tree(pf_NULL,layout=&#39;rectangular&#39;, branch.length = &quot;none&quot;)$ggplot</code></pre>
 <pre><code>Warning: Ignoring unknown parameters: branch.length
 
@@ -1051,7 +1139,7 @@ Warning: Ignoring unknown parameters: branch.length</code></pre>
           nrow = 1, 
           labels = c(&quot;Truth&quot;, &quot;nf = 5&quot;, &quot;nf = 10&quot;, &quot;nf = 50&quot;, &quot;nf = NULL&quot;), 
           label_size = 7)</code></pre>
-<p><img src="figure/SS_phylofactor.Rmd/unnamed-chunk-7-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/SS_phylofactor.Rmd/unnamed-chunk-6-1.png" width="1152" style="display: block; margin: auto;" /></p>
 </div>
 <div id="run-treeclimbr" class="section level1">
 <h1>run treeclimbR</h1>
@@ -1172,7 +1260,7 @@ loc</code></pre>
           nrow = 1, 
           labels = c(&quot;Truth&quot;, &quot;treeclimbR&quot;, &quot;nf = 5&quot;, &quot;nf = 10&quot;, &quot;nf = 50&quot;, &quot;nf = NULL&quot;), 
           label_size = 9)</code></pre>
-<p><img src="figure/SS_phylofactor.Rmd/unnamed-chunk-12-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/SS_phylofactor.Rmd/unnamed-chunk-11-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1256,29 +1344,30 @@ loaded via a namespace (and not attached):
  [83] knitr_1.26                  fs_1.3.1                   
  [85] robustbase_0.93-5           purrr_0.3.3                
  [87] RBGL_1.62.1                 nlme_3.1-142               
- [89] R.oo_1.23.0                 aplot_0.0.4.991            
- [91] compiler_3.6.1              png_0.1-7                  
- [93] treeio_1.11.3               tibble_3.0.0               
- [95] tweenr_1.0.1                pcaPP_1.9-73               
- [97] stringi_1.4.6               lattice_0.20-38            
- [99] nloptr_1.2.1                vctrs_0.2.4                
-[101] pillar_1.4.3                lifecycle_0.2.0            
-[103] BiocManager_1.30.10         GlobalOptions_0.1.1        
-[105] bitops_1.0-6                corpcor_1.6.9              
-[107] httpuv_1.5.2                patchwork_1.0.0            
-[109] R6_2.4.1                    latticeExtra_0.6-28        
-[111] promises_1.1.0              KernSmooth_2.23-15         
-[113] gridExtra_2.3               codetools_0.2-16           
-[115] boot_1.3-23                 MASS_7.3-51.4              
-[117] gtools_3.8.1                assertthat_0.2.1           
-[119] rprojroot_1.3-2             rjson_0.2.20               
-[121] withr_2.1.2                 mnormt_1.5-5               
-[123] multcomp_1.4-10             GenomeInfoDbData_1.2.2     
-[125] hms_0.5.2                   ncdfFlow_2.32.0            
-[127] grid_3.6.1                  minqa_1.2.4                
-[129] tidyr_1.0.2                 rmarkdown_1.17             
-[131] rvcheck_0.1.8               git2r_0.26.1               
-[133] base64enc_0.1-3             ellipse_0.4.1              </code></pre>
+ [89] whisker_0.4                 R.oo_1.23.0                
+ [91] aplot_0.0.4.991             compiler_3.6.1             
+ [93] png_0.1-7                   treeio_1.11.3              
+ [95] tibble_3.0.0                tweenr_1.0.1               
+ [97] pcaPP_1.9-73                stringi_1.4.6              
+ [99] lattice_0.20-38             nloptr_1.2.1               
+[101] vctrs_0.2.4                 pillar_1.4.3               
+[103] lifecycle_0.2.0             BiocManager_1.30.10        
+[105] GlobalOptions_0.1.1         bitops_1.0-6               
+[107] corpcor_1.6.9               httpuv_1.5.2               
+[109] patchwork_1.0.0             R6_2.4.1                   
+[111] latticeExtra_0.6-28         promises_1.1.0             
+[113] KernSmooth_2.23-15          gridExtra_2.3              
+[115] codetools_0.2-16            boot_1.3-23                
+[117] MASS_7.3-51.4               gtools_3.8.1               
+[119] assertthat_0.2.1            rprojroot_1.3-2            
+[121] rjson_0.2.20                withr_2.1.2                
+[123] mnormt_1.5-5                multcomp_1.4-10            
+[125] GenomeInfoDbData_1.2.2      hms_0.5.2                  
+[127] ncdfFlow_2.32.0             grid_3.6.1                 
+[129] minqa_1.2.4                 tidyr_1.0.2                
+[131] rmarkdown_1.17              rvcheck_0.1.8              
+[133] git2r_0.26.1                base64enc_0.1-3            
+[135] ellipse_0.4.1              </code></pre>
 </div>
 </div>
 
