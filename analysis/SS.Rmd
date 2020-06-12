@@ -26,7 +26,7 @@ suppressPackageStartupMessages({
 
 # Data simulation
 
-We simulate a scenario (`SS`) that only two branches on the tree have
+We simulate a scenario (`SS`) that only some leaves on the tree have
 differential abundance (signal) between groups. The data is simulated by
 swapping proportions of two branches, and leaves in the same branch have the
 same fold change.
@@ -89,27 +89,27 @@ site <- colData(lse)$group
 ```
 
 Different number of factors are used.
-```{r phylofactor, cache=TRUE}
+```{r phylofactor, cache=TRUE, results = hide}
 pf_5 <- PhyloFactor(count, tree, site, nfactors= 5)
 f_5 <- pf.tree(pf_5, tree = tree, layout='rectangular', 
                branch.length = "none",
-               ignore.tips = false)$ggplot
+               ignore.tips = FALSE)$ggplot
 
 
 pf_10 <- PhyloFactor(count, tree, site, nfactors= 10)
 f_10 <- pf.tree(pf_10, tree = tree,layout='rectangular', 
                 branch.length = "none",
-                ignore.tips = false)$ggplot
+                ignore.tips = FALSE)$ggplot
 
 pf_50 <- PhyloFactor(count, tree, site, nfactors= 50)
 f_50 <- pf.tree(pf_10, tree = tree,layout='rectangular', 
                 branch.length = "none",
-               ignore.tips = false)$ggplot
+               ignore.tips = FALSE)$ggplot
 
 pf_NULL <- PhyloFactor(count, tree, site, nfactors= NULL)
 f_NULL <- pf.tree(pf_NULL, tree = tree,layout='rectangular',
                   branch.length = "none",
-                  ignore.tips = false)$ggplot
+                  ignore.tips = FALSE)$ggplot
 
 # summary(pf_PhyloFactor,factor=1)
 # pf_PhyloFactor$factors

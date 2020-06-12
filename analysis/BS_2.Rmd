@@ -1,0 +1,220 @@
+---
+title: "BS_2"
+author: "fionarhuang"
+date: "2020-06-11"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+```{r}
+suppressPackageStartupMessages({
+    library(ggplot2)
+    library(gganimate)
+    library(ggtree)
+    library(dplyr)
+    library(treeclimbR)  
+    library(ape)
+    library(TreeHeatmap)
+    library(ggnewscale)
+    library(cowplot)
+    library(phylofactor)
+  library(treeSeg)
+})
+```
+
+
+# Data simulation
+
+We simulate a scenario (`BS`) that only two branches on the tree have
+differential abundance (signal) between groups. The data is simulated by
+swapping proportions of two branches, and leaves in the same branch have the
+same fold change.
+
+```{r}
+# generate a random tree
+set.seed(1)
+n <- 100
+tree <- rtree(n)
+
+
+# generate a random probility vector  for leaves
+p <- rbeta(n = n, shape1 = 2, shape2 = 5)
+p <- p/sum(p)
+names(p) <- tree$tip.label
+
+# # simulate counts by sampling from multinomial distribution
+lse <- simMult(pr = p, libSize = 1000, tree = tree,
+               minTip.A = 10, maxTip.A = 20,
+               ratio = 2, scenario = "BS",
+               nSam = c(10, 10))
+
+```
+
+## Viz simulated data
+
+DA branches are colored in orange or blue. Simulated counts are scaled and displayed in the heatmap
+```{r}
+# signal branches
+br <- metadata(lse)$branch
+source("code/viewSim.R")
+treeFig <- viewSim(lse, branch.length = "none",
+                   zoom_scale = 1, size = 1.1)
+
+# scale counts
+count <- assays(lse)[[1]]
+rownames(count) <- rowLinks(lse)$nodeLab
+
+scale_count <- t(apply(count, 1, FUN = function(x) {
+    xx <- scale(x)
+    (xx - min(xx))/(max(xx)-min(xx))
+}))
+rownames(scale_count) <- rownames(count)
+colnames(scale_count) <- colnames(count)
+
+
+# fig: tree + heatmap
+vv <- gsub(pattern = "_.*", "", colnames(count))
+names(vv) <- colnames(scale_count)
+fig <- TreeHeatmap(tree = tree, tree_fig = treeFig, 
+                   hm_data = scale_count,
+                   column_split = vv, rel_width = 0.7, 
+                   tree_hm_gap = 0.3) +
+    scale_fill_viridis_c(option = "B") +
+  theme(legend.position = c(0.1, 0.8))
+fig
+```
+
+
+# `PhyloFactor`
+
+```{r,fig.height=8}
+site <- colData(lse)$group
+```
+
+Different number of factors are used.
+```{r phylofactor, cache=TRUE, message=FALSE}
+pf_5 <- PhyloFactor(count, tree, site, nfactors= 5)
+f_5 <- pf.tree(pf_5, tree = tree, layout='rectangular', 
+               branch.length = "none",
+               ignore.tips = FALSE)$ggplot
+
+
+pf_10 <- PhyloFactor(count, tree, site, nfactors= 10)
+f_10 <- pf.tree(pf_10, tree = tree,layout='rectangular', 
+                branch.length = "none",
+                ignore.tips = FALSE)$ggplot
+
+pf_50 <- PhyloFactor(count, tree, site, nfactors= 50)
+f_50 <- pf.tree(pf_10, tree = tree,layout='rectangular', 
+                branch.length = "none",
+               ignore.tips = FALSE)$ggplot
+
+pf_NULL <- PhyloFactor(count, tree, site, nfactors= NULL)
+f_NULL <- pf.tree(pf_NULL, tree = tree,layout='rectangular',
+                  branch.length = "none",
+                  ignore.tips = FALSE)$ggplot
+
+# summary(pf_PhyloFactor,factor=1)
+# pf_PhyloFactor$factors
+```
+
+## Truth vs phylofactor
+```{r,fig.height=6, fig.width=12}
+plot_grid(treeFig, f_5, f_10, f_50, f_NULL, 
+          nrow = 1, 
+          labels = c("Truth", "nf = 5", "nf = 10", "nf = 50", "nf = NULL"), 
+          label_size = 7)
+
+```
+
+
+# treeclimbR
+
+## data aggregation
+```{r}
+all_node <- showNode(tree = rowTree(lse), only.leaf = FALSE)
+tse <- aggValue(x = lse, rowLevel = all_node)
+colData(tse)
+```
+
+## differential analysis
+
+```{r}
+res <- runDA(TSE = tse, feature_on_row = TRUE, 
+             filter_min_count = 0, 
+             design_terms = "group", normalize = FALSE)
+out <- nodeResult(object = res, n = Inf)
+head(out)
+dim(out)
+```
+
+## run treeclimbR
+```{r treeclimbR}
+# treeclimbR
+cand <- getCand(tree = rowTree(tse), score_data = out, 
+                node_column = "node", p_column = "PValue",
+                sign_column = "logFC", message = TRUE)
+
+best <- evalCand(tree = rowTree(tse), levels = cand$candidate_list, 
+                 score_data = out, node_column = "node",
+                 sign_column = "logFC",
+                 p_column = "PValue")
+infoCand(best)
+
+
+```
+
+
+## result
+
+```{r}
+# the detected nodes
+loc <- best$output[best$output$signal.node, ][["node"]]
+loc
+
+fig_climb <- treeFig +
+  geom_point2(aes(subset = (node %in% loc)), color = "red", size = 2) +
+  theme(legend.position = "none")
+```
+
+# treeSeg
+
+As `treeSeg` requires to specify the distribution of data, and accepts only `gauss` and `binomial`, we here transform P-value to Z-score to use `gauss`.
+
+```{r treeSeg, cache=TRUE}
+out_leaf <- out %>%
+  filter(node %in% 1:100) %>%
+  arrange(node)
+
+# check order
+all(out_leaf$node == 1:100)
+
+pval <- out_leaf$PValue
+tp <- 1-pval
+# 10E-8 is to avoid Inf value in z that treeSeg doesn't accept
+tp <- ifelse(tp == 0, 10E-8, ifelse(tp == 1, 1-10E-8, tp))
+z <- qnorm(tp)
+names(z) <- transNode(tree = tree, node = out_leaf$node)
+
+ansGauss <- treeSeg(z, tree, alpha = 0.05, fam = "gauss")
+ansGauss$mlAN
+
+fig_seg <- treeFig +
+  geom_point2(aes(subset = node %in% ansGauss$mlAN), 
+              color = "red")
+```
+
+
+# Truth vs methods
+```{r,fig.height=7, fig.width=12}
+plot_grid(fig, 
+          fig_seg + theme(legend.position = "none"), 
+          fig_climb, f_5, f_10, f_NULL, 
+          nrow = 1, rel_widths = c(0.28, rep(0.145, 5)),
+          labels = c("", "treeSeg", "treeclimbR", "nf = phyfact_5",
+                      "nf = phyfact_10", "nf = phyfact_NULL"), 
+          label_size = 9)
+
+```
+
