@@ -7,7 +7,7 @@
 
 [treeclimbR](https://github.com/fionarhuang/treeclimbR)
 
-# Results on toy data
+# Performances on toy data
 
 Results are [here](https://htmlpreview.github.io/?https://github.com/fionarhuang/benchmark_treebased/blob/master/docs/index.html)
 
