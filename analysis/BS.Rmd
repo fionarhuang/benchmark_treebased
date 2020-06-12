@@ -1,5 +1,5 @@
 ---
-title: "SS"
+title: "BS"
 author: "fionarhuang"
 date: "2020-06-11"
 output: workflowr::wflow_html
@@ -26,7 +26,7 @@ suppressPackageStartupMessages({
 
 # Data simulation
 
-We simulate a scenario (`SS`) that only two branches on the tree have
+We simulate a scenario (`BS`) that only two branches on the tree have
 differential abundance (signal) between groups. The data is simulated by
 swapping proportions of two branches, and leaves in the same branch have the
 same fold change.
@@ -42,8 +42,8 @@ p <- p/sum(p)
 names(p) <- tree$tip.label
 # # simulate counts by sampling from multinomial distribution
 lse <- simMult(pr = p, libSize = 1000, tree = tree,
-               minTip.A = 10, maxTip.A = 20,
-               ratio = 1.5, scenario = "SS",
+               minTip.A = 8, maxTip.A = 12,
+               ratio = 2, scenario = "BS",
                nSam = c(20, 20), pct = 0.6)
 ```
 
