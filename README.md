@@ -7,6 +7,10 @@
 
 [treeclimbR](https://github.com/fionarhuang/treeclimbR)
 
-# [Results](https://htmlpreview.github.io/?https://github.com/fionarhuang/benchmark_treebased/blob/master/docs/index.html)
+# Results
+
+Results are [here](https://htmlpreview.github.io/?https://github.com/fionarhuang/benchmark_treebased/blob/master/docs/index.html)
+
+Hope the work is done correctly. Comments, corrections are welcomed.
 
 
