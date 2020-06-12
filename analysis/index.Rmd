@@ -8,4 +8,23 @@ editor_options:
   chunk_output_type: console
 ---
 
-Welcome to my research website.
+- [BS_1](BS.html):
+    - Data simulation
+    - PhyloFactor
+    - treeclimbR
+    - treeSeg
+    - Truth vs Methods
+    
+- [BS_2](BS_2.html):
+    - Data simulation
+    - PhyloFactor
+    - treeclimbR
+    - treeSeg
+    - Truth vs Methods
+    
+- [SS](SS.html):
+    - Data simulation
+    - PhyloFactor
+    - treeclimbR
+    - treeSeg
+    - Truth vs Methods

@@ -1,17 +1,18 @@
 name: benchmark_treebased
 output_dir: ../docs
 navbar:
-  title: benchmark_treebased
+  title: "toy_benchmark"
   left:
-  - text: Home
-    href: index.html
-  - text: About
-    href: about.html
-  - text: License
-    href: license.html
+  - text: BS_1
+    href: BS.html
+  - text: BS_2
+    href: BS_2.html
+  - text: SS
+    href: SS.html
   right:
+  - text: Robinson Lab
+    href: https://robinsonlabuzh.github.io
   - icon: fa-github
-    text: Source code
     href: https://github.com/fionarhuang/benchmark_treebased
 output:
   workflowr::wflow_html:
