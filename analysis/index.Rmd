@@ -8,14 +8,14 @@ editor_options:
   chunk_output_type: console
 ---
 
-- [BS_1](BS.html):
+- [BS_1](BS_2.html):
     - Data simulation
     - PhyloFactor
     - treeclimbR
     - treeSeg
     - Truth vs Methods
     
-- [BS_2](BS_2.html):
+- [BS_2](BS.html):
     - Data simulation
     - PhyloFactor
     - treeclimbR

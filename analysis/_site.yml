@@ -4,9 +4,9 @@ navbar:
   title: "toy_benchmark"
   left:
   - text: BS_1
-    href: BS.html
-  - text: BS_2
     href: BS_2.html
+  - text: BS_2
+    href: BS.html
   - text: SS
     href: SS.html
   right:
