@@ -28,8 +28,7 @@ suppressPackageStartupMessages({
 
 We simulate a scenario (`SS`) that only some leaves on the tree have
 differential abundance (signal) between groups. The data is simulated by
-swapping proportions of two branches, and leaves in the same branch have the
-same fold change.
+swapping proportions of two branches. (Leaves in orange are not really a branch. Here, to mention them easily, we say they are in the orange 'branch'). Leaves in the same signal branch have the same fold change. 
 
 ```{r}
 # generate a random tree
@@ -89,7 +88,7 @@ site <- colData(lse)$group
 ```
 
 Different number of factors are used.
-```{r phylofactor, cache=TRUE, results = hide}
+```{r phylofactor, cache=TRUE}
 pf_5 <- PhyloFactor(count, tree, site, nfactors= 5)
 f_5 <- pf.tree(pf_5, tree = tree, layout='rectangular', 
                branch.length = "none",

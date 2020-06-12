@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="fionarhuang" />
+
+<meta name="date" content="2020-06-11" />
+
+<title>SS</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">toy_benchmark</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="BS_2.html">BS_1</a>
+</li>
+<li>
+  <a href="BS.html">BS_2</a>
+</li>
+<li>
+  <a href="SS.html">SS</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://robinsonlabuzh.github.io">Robinson Lab</a>
+</li>
+<li>
+  <a href="https://github.com/fionarhuang/benchmark_treebased">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">SS</h1>
+<h4 class="author">fionarhuang</h4>
+<h4 class="date">2020-06-11</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2020-06-12
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 2
+</p>
+<p>
+<strong>Knit directory:</strong> <code>benchmark_treebased/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.5.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20200610code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20200610)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20200610code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20200610)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongdetected"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>Cache:</strong> detected </a>
+</p>
+</div>
+<div id="strongCachestrongdetected" class="panel-collapse collapse">
+<div class="panel-body">
+The following chunks had caches available:
+<ul>
+<li>
+phylofactor
+</li>
+<li>
+treeSeg
+</li>
+<li>
+unnamed-chunk-5
+</li>
+<li>
+unnamed-chunk-6
+</li>
+</ul>
+<p>To ensure reproducibility of the results, delete the cache directory <code>SS_cache</code> and re-run the analysis. To have workflowr automatically delete the cache directory prior to building the file, set <code>delete_cache = TRUE</code> when running <code>wflow_build()</code> or <code>wflow_publish()</code>.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfionarhuangbenchmarktreebasedtree2a908129b59cd74fa64b8e0bb9f3cbe46413507atargetblank2a90812a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fionarhuang/benchmark_treebased/tree/2a908129b59cd74fa64b8e0bb9f3cbe46413507a" target="_blank">2a90812</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfionarhuangbenchmarktreebasedtree2a908129b59cd74fa64b8e0bb9f3cbe46413507atargetblank2a90812a" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    analysis/BS_2_cache/
+    Ignored:    analysis/BS_cache/
+    Ignored:    analysis/SS_cache/
+    Ignored:    analysis/figure/
+
+Untracked files:
+    Untracked:  analysis/1-phylofactor.Rmd
+    Untracked:  analysis/2_phylofactor.Rmd
+    Untracked:  analysis/3_phylofactor.Rmd
+    Untracked:  analysis/4_phylofactor.Rmd
+    Untracked:  analysis/toy_phylofactor.Rmd
+    Untracked:  code/viewSim.R
+    Untracked:  output/viewSim.R
+
+Unstaged changes:
+    Modified:   analysis/SS.Rmd
+    Modified:   analysis/phylofactor.Rmd
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the R Markdown and HTML files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view them.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/fionarhuang/benchmark_treebased/blob/ceba2640452384daea41168fd49d42e4cb669374/analysis/SS.Rmd" target="_blank">ceba264</a>
+</td>
+<td>
+fionarhuang
+</td>
+<td>
+2020-06-12
+</td>
+<td>
+upload
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<pre class="r"><code>suppressPackageStartupMessages({
+    library(ggplot2)
+    library(gganimate)
+    library(ggtree)
+    library(dplyr)
+    library(treeclimbR)  
+    library(ape)
+    library(TreeHeatmap)
+    library(ggnewscale)
+    library(cowplot)
+    library(phylofactor)
+  library(treeSeg)
+})</code></pre>
+<div id="data-simulation" class="section level1">
+<h1>Data simulation</h1>
+<p>We simulate a scenario (<code>SS</code>) that only some leaves on the tree have differential abundance (signal) between groups. The data is simulated by swapping proportions of two branches. (Leaves in orange are not really a branch. Here, to mention them easily, we say they are in the orange ‘branch’). Leaves in the same signal branch have the same fold change.</p>
+<pre class="r"><code># generate a random tree
+set.seed(1)
+n &lt;- 100
+tree &lt;- rtree(n)
+# generate a random probility vector  for leaves
+p &lt;- rbeta(n = n, shape1 = 2, shape2 = 5)
+p &lt;- p/sum(p)
+names(p) &lt;- tree$tip.label
+# # simulate counts by sampling from multinomial distribution
+lse &lt;- simMult(pr = p, libSize = 1000, tree = tree,
+               minTip.A = 10, maxTip.A = 20,
+               ratio = 1.5, scenario = &quot;SS&quot;,
+               nSam = c(20, 20), pct = 0.6)</code></pre>
+<div id="viz-simulated-data" class="section level2">
+<h2>Viz simulated data</h2>
+<p>DA branches are colored in orange or blue. Simulated counts are scaled and displayed in the heatmap</p>
+<pre class="r"><code># signal branches
+br &lt;- metadata(lse)$branch
+source(&quot;code/viewSim.R&quot;)
+treeFig &lt;- viewSim(lse, branch.length = &quot;none&quot;,
+                   zoom_scale = 1, size = 1.1)
+
+# scale counts
+count &lt;- assays(lse)[[1]]
+rownames(count) &lt;- rowLinks(lse)$nodeLab
+
+scale_count &lt;- t(apply(count, 1, FUN = function(x) {
+    xx &lt;- scale(x)
+    (xx - min(xx))/(max(xx)-min(xx))
+}))
+rownames(scale_count) &lt;- rownames(count)
+colnames(scale_count) &lt;- colnames(count)
+
+
+# fig: tree + heatmap
+vv &lt;- gsub(pattern = &quot;_.*&quot;, &quot;&quot;, colnames(count))
+names(vv) &lt;- colnames(scale_count)
+fig &lt;- TreeHeatmap(tree = tree, tree_fig = treeFig, 
+                   hm_data = scale_count,
+                   column_split = vv, rel_width = 0.7, 
+                   tree_hm_gap = 0.3) +
+    scale_fill_viridis_c(option = &quot;B&quot;) +
+  theme(legend.position = c(0.1, 0.8))</code></pre>
+<pre><code>Scale for &#39;fill&#39; is already present. Adding another scale for &#39;fill&#39;, which
+will replace the existing scale.</code></pre>
+<pre class="r"><code>fig</code></pre>
+<p><img src="figure/SS.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="phylofactor" class="section level1">
+<h1><code>PhyloFactor</code></h1>
+<pre class="r"><code>site &lt;- colData(lse)$group</code></pre>
+<p>Different number of factors are used.</p>
+<pre class="r"><code>pf_5 &lt;- PhyloFactor(count, tree, site, nfactors= 5)</code></pre>
+<pre><code>Warning in PhyloFactor(count, tree, site, nfactors = 5): Data has zeros and will
+receive default modification of zeros. Zeros will be replaced column wise with
+delta*min(x[x&gt;0]), default delta=0.65</code></pre>
+<pre><code>
+ 1 factor completed in 0.0329 minutes.    Estimated time of completion: 2020-06-12 14:54:34   
+
+ 2 factors completed in 0.0622 minutes.     Estimated time of completion: 2020-06-12 14:54:33   
+
+ 3 factors completed in 0.0921 minutes.     Estimated time of completion: 2020-06-12 14:54:33   
+
+ 4 factors completed in 0.121 minutes.     Estimated time of completion: 2020-06-12 14:54:33   
+
+ 5 factors completed in 0.151 minutes.     Estimated time of completion: 2020-06-12 14:54:33   </code></pre>
+<pre class="r"><code>f_5 &lt;- pf.tree(pf_5, tree = tree, layout=&#39;rectangular&#39;, 
+               branch.length = &quot;none&quot;,
+               ignore.tips = FALSE)$ggplot</code></pre>
+<pre><code>Warning: Ignoring unknown parameters: branch.length</code></pre>
+<pre><code>Warning: Ignoring unknown parameters: branch.length</code></pre>
+<pre class="r"><code>pf_10 &lt;- PhyloFactor(count, tree, site, nfactors= 10)</code></pre>
+<pre><code>Warning in PhyloFactor(count, tree, site, nfactors = 10): Data has zeros and
+will receive default modification of zeros. Zeros will be replaced column wise
+with delta*min(x[x&gt;0]), default delta=0.65</code></pre>
+<pre><code>
+ 1 factor completed in 0.0303 minutes.    Estimated time of completion: 2020-06-12 14:54:52   
+
+ 2 factors completed in 0.0604 minutes.     Estimated time of completion: 2020-06-12 14:54:52   
+
+ 3 factors completed in 0.0904 minutes.     Estimated time of completion: 2020-06-12 14:54:52   
+
+ 4 factors completed in 0.12 minutes.     Estimated time of completion: 2020-06-12 14:54:52   
+
+ 5 factors completed in 0.149 minutes.     Estimated time of completion: 2020-06-12 14:54:51   
+
+ 6 factors completed in 0.18 minutes.     Estimated time of completion: 2020-06-12 14:54:52   
+
+ 7 factors completed in 0.211 minutes.     Estimated time of completion: 2020-06-12 14:54:52   
+
+ 8 factors completed in 0.243 minutes.     Estimated time of completion: 2020-06-12 14:54:52   
+
+ 9 factors completed in 0.272 minutes.     Estimated time of completion: 2020-06-12 14:54:52   
+
+ 10 factors completed in 0.302 minutes.     Estimated time of completion: 2020-06-12 14:54:52   </code></pre>
+<pre class="r"><code>f_10 &lt;- pf.tree(pf_10, tree = tree,layout=&#39;rectangular&#39;, 
+                branch.length = &quot;none&quot;,
+                ignore.tips = FALSE)$ggplot</code></pre>
+<pre><code>Warning: Ignoring unknown parameters: branch.length
+
+Warning: Ignoring unknown parameters: branch.length</code></pre>
+<pre class="r"><code>pf_50 &lt;- PhyloFactor(count, tree, site, nfactors= 50)</code></pre>
+<pre><code>Warning in PhyloFactor(count, tree, site, nfactors = 50): Data has zeros and
+will receive default modification of zeros. Zeros will be replaced column wise
+with delta*min(x[x&gt;0]), default delta=0.65</code></pre>
+<pre><code>
+ 1 factor completed in 0.0309 minutes.    Estimated time of completion: 2020-06-12 14:56:25   
+
+ 2 factors completed in 0.0594 minutes.     Estimated time of completion: 2020-06-12 14:56:21   
+
+ 3 factors completed in 0.0889 minutes.     Estimated time of completion: 2020-06-12 14:56:21   
+
+ 4 factors completed in 0.119 minutes.     Estimated time of completion: 2020-06-12 14:56:22   
+
+ 5 factors completed in 0.151 minutes.     Estimated time of completion: 2020-06-12 14:56:23   
+
+ 6 factors completed in 0.187 minutes.     Estimated time of completion: 2020-06-12 14:56:26   
+
+ 7 factors completed in 0.22 minutes.     Estimated time of completion: 2020-06-12 14:56:26   
+
+ 8 factors completed in 0.25 minutes.     Estimated time of completion: 2020-06-12 14:56:26   
+
+ 9 factors completed in 0.281 minutes.     Estimated time of completion: 2020-06-12 14:56:26   
+
+ 10 factors completed in 0.314 minutes.     Estimated time of completion: 2020-06-12 14:56:26   
+
+ 11 factors completed in 0.345 minutes.     Estimated time of completion: 2020-06-12 14:56:26   
+
+ 12 factors completed in 0.374 minutes.     Estimated time of completion: 2020-06-12 14:56:26   
+
+ 13 factors completed in 0.407 minutes.     Estimated time of completion: 2020-06-12 14:56:26   
+
+ 14 factors completed in 0.436 minutes.     Estimated time of completion: 2020-06-12 14:56:26   
+
+ 15 factors completed in 0.466 minutes.     Estimated time of completion: 2020-06-12 14:56:25   
+
+ 16 factors completed in 0.499 minutes.     Estimated time of completion: 2020-06-12 14:56:26   
+
+ 17 factors completed in 0.527 minutes.     Estimated time of completion: 2020-06-12 14:56:25   
+
+ 18 factors completed in 0.558 minutes.     Estimated time of completion: 2020-06-12 14:56:25   
+
+ 19 factors completed in 0.585 minutes.     Estimated time of completion: 2020-06-12 14:56:25   
+
+ 20 factors completed in 0.611 minutes.     Estimated time of completion: 2020-06-12 14:56:24   
+
+ 21 factors completed in 0.638 minutes.     Estimated time of completion: 2020-06-12 14:56:23   
+
+ 22 factors completed in 0.664 minutes.     Estimated time of completion: 2020-06-12 14:56:23   
+
+ 23 factors completed in 0.69 minutes.     Estimated time of completion: 2020-06-12 14:56:22   
+
+ 24 factors completed in 0.715 minutes.     Estimated time of completion: 2020-06-12 14:56:22   
+
+ 25 factors completed in 0.741 minutes.     Estimated time of completion: 2020-06-12 14:56:21   
+
+ 26 factors completed in 0.766 minutes.     Estimated time of completion: 2020-06-12 14:56:21   
+
+ 27 factors completed in 0.791 minutes.     Estimated time of completion: 2020-06-12 14:56:20   
+
+ 28 factors completed in 0.815 minutes.     Estimated time of completion: 2020-06-12 14:56:20   
+
+ 29 factors completed in 0.839 minutes.     Estimated time of completion: 2020-06-12 14:56:19   
+
+ 30 factors completed in 0.863 minutes.     Estimated time of completion: 2020-06-12 14:56:19   
+
+ 31 factors completed in 0.887 minutes.     Estimated time of completion: 2020-06-12 14:56:18   
+
+ 32 factors completed in 0.91 minutes.     Estimated time of completion: 2020-06-12 14:56:18   
+
+ 33 factors completed in 0.932 minutes.     Estimated time of completion: 2020-06-12 14:56:17   
+
+ 34 factors completed in 0.956 minutes.     Estimated time of completion: 2020-06-12 14:56:17   
+
+ 35 factors completed in 0.98 minutes.     Estimated time of completion: 2020-06-12 14:56:16   
+
+ 36 factors completed in 1 minutes.     Estimated time of completion: 2020-06-12 14:56:16   
+
+ 37 factors completed in 1.03 minutes.     Estimated time of completion: 2020-06-12 14:56:16   
+
+ 38 factors completed in 1.05 minutes.     Estimated time of completion: 2020-06-12 14:56:16   
+
+ 39 factors completed in 1.08 minutes.     Estimated time of completion: 2020-06-12 14:56:15   
+
+ 40 factors completed in 1.1 minutes.     Estimated time of completion: 2020-06-12 14:56:15   
+
+ 41 factors completed in 1.12 minutes.     Estimated time of completion: 2020-06-12 14:56:14   
+
+ 42 factors completed in 1.14 minutes.     Estimated time of completion: 2020-06-12 14:56:14   
+
+ 43 factors completed in 1.16 minutes.     Estimated time of completion: 2020-06-12 14:56:13   
+
+ 44 factors completed in 1.18 minutes.     Estimated time of completion: 2020-06-12 14:56:13   
+
+ 45 factors completed in 1.2 minutes.     Estimated time of completion: 2020-06-12 14:56:12   
+
+ 46 factors completed in 1.22 minutes.     Estimated time of completion: 2020-06-12 14:56:12   
+
+ 47 factors completed in 1.24 minutes.     Estimated time of completion: 2020-06-12 14:56:12   
+
+ 48 factors completed in 1.26 minutes.     Estimated time of completion: 2020-06-12 14:56:11   
+
+ 49 factors completed in 1.28 minutes.     Estimated time of completion: 2020-06-12 14:56:11   
+
+ 50 factors completed in 1.3 minutes.     Estimated time of completion: 2020-06-12 14:56:10   </code></pre>
+<pre class="r"><code>f_50 &lt;- pf.tree(pf_10, tree = tree,layout=&#39;rectangular&#39;, 
+                branch.length = &quot;none&quot;,
+               ignore.tips = FALSE)$ggplot</code></pre>
+<pre><code>Warning: Ignoring unknown parameters: branch.length
+
+Warning: Ignoring unknown parameters: branch.length</code></pre>
+<pre class="r"><code>pf_NULL &lt;- PhyloFactor(count, tree, site, nfactors= NULL)</code></pre>
+<pre><code>Warning in PhyloFactor(count, tree, site, nfactors = NULL): Data has zeros and
+will receive default modification of zeros. Zeros will be replaced column wise
+with delta*min(x[x&gt;0]), default delta=0.65</code></pre>
+<pre><code>
+ 1 factor completed in 0.0306 minutes.    Estimated time of completion: at latest 2020-06-12 14:59:15   
+
+ 2 factors completed in 0.0619 minutes.     Estimated time of completion: at latest 2020-06-12 14:59:17   
+
+ 3 factors completed in 0.0909 minutes.     Estimated time of completion: at latest 2020-06-12 14:59:13   
+
+ 4 factors completed in 0.12 minutes.     Estimated time of completion: at latest 2020-06-12 14:59:11   
+
+ 5 factors completed in 0.15 minutes.     Estimated time of completion: at latest 2020-06-12 14:59:11   
+
+ 6 factors completed in 0.179 minutes.     Estimated time of completion: at latest 2020-06-12 14:59:10   
+
+ 7 factors completed in 0.208 minutes.     Estimated time of completion: at latest 2020-06-12 14:59:09   
+
+ 8 factors completed in 0.237 minutes.     Estimated time of completion: at latest 2020-06-12 14:59:09   
+
+ 9 factors completed in 0.266 minutes.     Estimated time of completion: at latest 2020-06-12 14:59:08   
+
+ 10 factors completed in 0.294 minutes.     Estimated time of completion: at latest 2020-06-12 14:59:08   
+
+ 11 factors completed in 0.322 minutes.     Estimated time of completion: at latest 2020-06-12 14:59:06   
+
+ 12 factors completed in 0.351 minutes.     Estimated time of completion: at latest 2020-06-12 14:59:06   
+
+ 13 factors completed in 0.378 minutes.     Estimated time of completion: at latest 2020-06-12 14:59:06   
+
+ 14 factors completed in 0.407 minutes.     Estimated time of completion: at latest 2020-06-12 14:59:05   
+
+ 15 factors completed in 0.432 minutes.     Estimated time of completion: at latest 2020-06-12 14:59:04   
+
+ 16 factors completed in 0.459 minutes.     Estimated time of completion: at latest 2020-06-12 14:59:03   
+
+ 17 factors completed in 0.486 minutes.     Estimated time of completion: at latest 2020-06-12 14:59:03   
+
+ 18 factors completed in 0.514 minutes.     Estimated time of completion: at latest 2020-06-12 14:59:02   
+
+ 19 factors completed in 0.539 minutes.     Estimated time of completion: at latest 2020-06-12 14:59:01   
+
+ 20 factors completed in 0.568 minutes.     Estimated time of completion: at latest 2020-06-12 14:59:01   
+
+ 21 factors completed in 0.593 minutes.     Estimated time of completion: at latest 2020-06-12 14:59:00   
+
+ 22 factors completed in 0.62 minutes.     Estimated time of completion: at latest 2020-06-12 14:59:00   
+
+ 23 factors completed in 0.645 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:59   
+
+ 24 factors completed in 0.67 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:58   
+
+ 25 factors completed in 0.695 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:58   
+
+ 26 factors completed in 0.721 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:57   
+
+ 27 factors completed in 0.746 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:57   
+
+ 28 factors completed in 0.769 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:56   
+
+ 29 factors completed in 0.794 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:55   
+
+ 30 factors completed in 0.817 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:54   
+
+ 31 factors completed in 0.839 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:53   
+
+ 32 factors completed in 0.864 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:53   
+
+ 33 factors completed in 0.886 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:52   
+
+ 34 factors completed in 0.908 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:51   
+
+ 35 factors completed in 0.931 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:51   
+
+ 36 factors completed in 0.953 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:50   
+
+ 37 factors completed in 0.977 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:49   
+
+ 38 factors completed in 1 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:49   
+
+ 39 factors completed in 1.03 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:49   
+
+ 40 factors completed in 1.05 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:48   
+
+ 41 factors completed in 1.07 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:48   
+
+ 42 factors completed in 1.09 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:47   
+
+ 43 factors completed in 1.11 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:46   
+
+ 44 factors completed in 1.13 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:46   
+
+ 45 factors completed in 1.15 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:45   
+
+ 46 factors completed in 1.18 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:44   
+
+ 47 factors completed in 1.19 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:43   
+
+ 48 factors completed in 1.21 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:43   
+
+ 49 factors completed in 1.23 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:42   
+
+ 50 factors completed in 1.25 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:41   
+
+ 51 factors completed in 1.27 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:41   
+
+ 52 factors completed in 1.29 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:40   
+
+ 53 factors completed in 1.31 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:40   
+
+ 54 factors completed in 1.33 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:39   
+
+ 55 factors completed in 1.35 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:38   
+
+ 56 factors completed in 1.37 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:38   
+
+ 57 factors completed in 1.39 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:37   
+
+ 58 factors completed in 1.41 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:37   
+
+ 59 factors completed in 1.43 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:36   
+
+ 60 factors completed in 1.44 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:35   
+
+ 61 factors completed in 1.46 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:34   
+
+ 62 factors completed in 1.48 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:34   
+
+ 63 factors completed in 1.49 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:33   
+
+ 64 factors completed in 1.51 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:32   
+
+ 65 factors completed in 1.52 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:32   
+
+ 66 factors completed in 1.54 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:31   
+
+ 67 factors completed in 1.56 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:30   
+
+ 68 factors completed in 1.57 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:30   
+
+ 69 factors completed in 1.59 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:29   
+
+ 70 factors completed in 1.6 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:28   
+
+ 71 factors completed in 1.61 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:27   
+
+ 72 factors completed in 1.63 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:27   
+
+ 73 factors completed in 1.64 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:26   
+
+ 74 factors completed in 1.66 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:25   
+
+ 75 factors completed in 1.67 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:25   
+
+ 76 factors completed in 1.68 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:24   
+
+ 77 factors completed in 1.7 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:23   
+
+ 78 factors completed in 1.71 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:22   
+
+ 79 factors completed in 1.72 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:22   
+
+ 80 factors completed in 1.74 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:21   
+
+ 81 factors completed in 1.75 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:20   
+
+ 82 factors completed in 1.76 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:20   
+
+ 83 factors completed in 1.77 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:19   
+
+ 84 factors completed in 1.78 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:18   
+
+ 85 factors completed in 1.79 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:18   
+
+ 86 factors completed in 1.81 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:17   
+
+ 87 factors completed in 1.82 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:16   
+
+ 88 factors completed in 1.83 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:16   
+
+ 89 factors completed in 1.84 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:15   
+
+ 90 factors completed in 1.85 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:14   
+
+ 91 factors completed in 1.86 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:13   
+
+ 92 factors completed in 1.87 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:13   
+
+ 93 factors completed in 1.88 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:12   
+
+ 94 factors completed in 1.89 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:11   
+
+ 95 factors completed in 1.9 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:11   
+
+ 96 factors completed in 1.91 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:10   
+
+ 97 factors completed in 1.91 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:09   
+
+ 98 factors completed in 1.92 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:09   
+
+ 99 factors completed in 1.93 minutes.     Estimated time of completion: at latest 2020-06-12 14:58:08   </code></pre>
+<pre class="r"><code>f_NULL &lt;- pf.tree(pf_NULL, tree = tree,layout=&#39;rectangular&#39;,
+                  branch.length = &quot;none&quot;,
+                  ignore.tips = FALSE)$ggplot</code></pre>
+<pre><code>Warning: Ignoring unknown parameters: branch.length
+
+Warning: Ignoring unknown parameters: branch.length</code></pre>
+<pre class="r"><code># summary(pf_PhyloFactor,factor=1)
+# pf_PhyloFactor$factors</code></pre>
+<div class="alert alert-warning">
+<p>
+<strong>Warning:</strong> The above code chunk cached its results, but it won’t be re-run if previous chunks it depends on are updated. If you need to use caching, it is highly recommended to also set <code>knitr::opts_chunk$set(autodep = TRUE)</code> at the top of the file (in a chunk that is not cached). Alternatively, you can customize the option <code>dependson</code> for each individual chunk that is cached. Using either <code>autodep</code> or <code>dependson</code> will remove this warning. See the <a href="https://yihui.name/knitr/options/#cache"
+>knitr cache options</a> for more details.
+</p>
+</div>
+<div id="truth-vs-phylofactor" class="section level2">
+<h2>Truth vs phylofactor</h2>
+<pre class="r"><code>plot_grid(treeFig, f_5, f_10, f_50, f_NULL, 
+          nrow = 1, 
+          labels = c(&quot;Truth&quot;, &quot;nf = 5&quot;, &quot;nf = 10&quot;, &quot;nf = 50&quot;, &quot;nf = NULL&quot;), 
+          label_size = 7)</code></pre>
+<p><img src="figure/SS.Rmd/unnamed-chunk-5-1.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="treeclimbr" class="section level1">
+<h1>treeclimbR</h1>
+<div id="data-aggregation" class="section level2">
+<h2>data aggregation</h2>
+<pre class="r"><code>all_node &lt;- showNode(tree = rowTree(lse), only.leaf = FALSE)
+tse &lt;- aggValue(x = lse, rowLevel = all_node)
+colData(tse)</code></pre>
+<pre><code>DataFrame with 40 rows and 1 column
+         group
+      &lt;factor&gt;
+C1_1        C1
+C1_2        C1
+C1_3        C1
+C1_4        C1
+C1_5        C1
+...        ...
+C2_16       C2
+C2_17       C2
+C2_18       C2
+C2_19       C2
+C2_20       C2</code></pre>
+</div>
+<div id="differential-analysis" class="section level2">
+<h2>differential analysis</h2>
+<pre class="r"><code>res &lt;- runDA(TSE = tse, feature_on_row = TRUE, 
+             filter_min_count = 0, 
+             design_terms = &quot;group&quot;, normalize = FALSE)
+out &lt;- nodeResult(object = res, n = Inf)
+head(out)</code></pre>
+<pre><code>          node      logFC   logCPM        LR        PValue           FDR
+alias_179  179 -1.3516331 17.35898 1299.1870 1.697869e-284 3.378760e-282
+alias_143  143  0.9082591 17.84755  867.8511 9.566389e-191 9.518557e-189
+alias_142  142  0.8997545 17.85817  858.6328 9.655929e-189 6.405099e-187
+alias_169  169 -0.8440003 17.91916  792.0317 2.914283e-174 1.449856e-172
+alias_147  147  0.9457736 17.52817  753.0829 8.571850e-166 3.411596e-164
+alias_180  180 -1.3369665 16.58391  731.4019 4.439776e-161 1.472526e-159</code></pre>
+<pre class="r"><code>dim(out)</code></pre>
+<pre><code>[1] 199   6</code></pre>
+</div>
+<div id="run-treeclimbr" class="section level2">
+<h2>run treeclimbR</h2>
+<pre class="r"><code># treeclimbR
+cand &lt;- getCand(tree = rowTree(tse), score_data = out, 
+                node_column = &quot;node&quot;, p_column = &quot;PValue&quot;,
+                sign_column = &quot;logFC&quot;, message = TRUE)</code></pre>
+<pre><code>Searching candidates on t =  0 ...</code></pre>
+<pre><code>Searching candidates on t =  0.01 ...</code></pre>
+<pre><code>Searching candidates on t =  0.02 ...</code></pre>
+<pre><code>Searching candidates on t =  0.03 ...</code></pre>
+<pre><code>Searching candidates on t =  0.04 ...</code></pre>
+<pre><code>Searching candidates on t =  0.05 ...</code></pre>
+<pre><code>Searching candidates on t =  0.1 ...</code></pre>
+<pre><code>Searching candidates on t =  0.15 ...</code></pre>
+<pre><code>Searching candidates on t =  0.2 ...</code></pre>
+<pre><code>Searching candidates on t =  0.25 ...</code></pre>
+<pre><code>Searching candidates on t =  0.3 ...</code></pre>
+<pre><code>Searching candidates on t =  0.35 ...</code></pre>
+<pre><code>Searching candidates on t =  0.4 ...</code></pre>
+<pre><code>Searching candidates on t =  0.45 ...</code></pre>
+<pre><code>Searching candidates on t =  0.5 ...</code></pre>
+<pre><code>Searching candidates on t =  0.55 ...</code></pre>
+<pre><code>Searching candidates on t =  0.6 ...</code></pre>
+<pre><code>Searching candidates on t =  0.65 ...</code></pre>
+<pre><code>Searching candidates on t =  0.7 ...</code></pre>
+<pre><code>Searching candidates on t =  0.75 ...</code></pre>
+<pre><code>Searching candidates on t =  0.8 ...</code></pre>
+<pre><code>Searching candidates on t =  0.85 ...</code></pre>
+<pre><code>Searching candidates on t =  0.9 ...</code></pre>
+<pre><code>Searching candidates on t =  0.95 ...</code></pre>
+<pre><code>Searching candidates on t =  1 ...</code></pre>
+<pre class="r"><code>best &lt;- evalCand(tree = rowTree(tse), levels = cand$candidate_list, 
+                 score_data = out, node_column = &quot;node&quot;,
+                 sign_column = &quot;logFC&quot;,
+                 p_column = &quot;PValue&quot;)
+infoCand(best)</code></pre>
+<pre><code>      t    upper_t is_valid method limit_rej level_name  best rej_leaf rej_node
+1  0.00 0.03636364     TRUE     BH      0.05          0 FALSE       30       30
+2  0.01 0.15000000     TRUE     BH      0.05       0.01 FALSE       30       12
+3  0.02 0.15000000     TRUE     BH      0.05       0.02 FALSE       30       12
+4  0.03 0.15000000     TRUE     BH      0.05       0.03 FALSE       30       12
+5  0.04 0.15000000     TRUE     BH      0.05       0.04 FALSE       30       12
+6  0.05 0.15000000     TRUE     BH      0.05       0.05 FALSE       30       12
+7  0.10 0.15000000     TRUE     BH      0.05        0.1 FALSE       30       12
+8  0.15 0.24444444     TRUE     BH      0.05       0.15  TRUE       31        9
+9  0.20 0.24444444     TRUE     BH      0.05        0.2  TRUE       31        9
+10 0.25 0.24444444    FALSE     BH      0.05       0.25 FALSE       31        9
+11 0.30 0.24444444    FALSE     BH      0.05        0.3 FALSE       31        9
+12 0.35 0.24444444    FALSE     BH      0.05       0.35 FALSE       31        9
+13 0.40 0.24444444    FALSE     BH      0.05        0.4 FALSE       31        9
+14 0.45 0.24444444    FALSE     BH      0.05       0.45 FALSE       31        9
+15 0.50 0.24444444    FALSE     BH      0.05        0.5 FALSE       31        9
+16 0.55 0.24444444    FALSE     BH      0.05       0.55 FALSE       31        9
+17 0.60 0.24444444    FALSE     BH      0.05        0.6 FALSE       31        9
+18 0.65 0.24444444    FALSE     BH      0.05       0.65 FALSE       31        9
+19 0.70 0.24444444    FALSE     BH      0.05        0.7 FALSE       31        9
+20 0.75 0.24444444    FALSE     BH      0.05       0.75 FALSE       31        9
+21 0.80 0.24444444    FALSE     BH      0.05        0.8 FALSE       31        9
+22 0.85 0.24444444    FALSE     BH      0.05       0.85 FALSE       31        9
+23 0.90 0.24444444    FALSE     BH      0.05        0.9 FALSE       31        9
+24 0.95 0.24444444    FALSE     BH      0.05       0.95 FALSE       31        9
+25 1.00 0.24444444    FALSE     BH      0.05          1 FALSE       31        9</code></pre>
+</div>
+<div id="result" class="section level2">
+<h2>result</h2>
+<pre class="r"><code># the detected nodes
+loc &lt;- best$output[best$output$signal.node, ][[&quot;node&quot;]]
+loc</code></pre>
+<pre><code>[1]  41  44  47  50  51  52  53 179 150</code></pre>
+<pre class="r"><code>fig_climb &lt;- treeFig +
+  geom_point2(aes(subset = (node %in% loc)), color = &quot;red&quot;, size = 2) +
+  theme(legend.position = &quot;none&quot;)</code></pre>
+</div>
+</div>
+<div id="treeseg" class="section level1">
+<h1>treeSeg</h1>
+<p>As <code>treeSeg</code> requires to specify the distribution of data, and accepts only <code>gauss</code> and <code>binomial</code>, we here transform P-value to Z-score to use <code>gauss</code>.</p>
+<pre class="r"><code>out_leaf &lt;- out %&gt;%
+  filter(node %in% 1:100) %&gt;%
+  arrange(node)
+
+# check order
+all(out_leaf$node == 1:100)</code></pre>
+<pre><code>[1] TRUE</code></pre>
+<pre class="r"><code>pval &lt;- out_leaf$PValue
+tp &lt;- 1-pval
+# 10E-8 is to avoid Inf value in z that treeSeg doesn&#39;t accept
+tp &lt;- ifelse(tp == 0, 10E-8, ifelse(tp == 1, 1-10E-8, tp))
+z &lt;- qnorm(tp)
+names(z) &lt;- transNode(tree = tree, node = out_leaf$node)
+
+ansGauss &lt;- treeSeg(z, tree, alpha = 0.05, fam = &quot;gauss&quot;)
+ansGauss$mlAN</code></pre>
+<pre><code>[1]  16 141 179 143  92  42  49</code></pre>
+<pre class="r"><code>fig_seg &lt;- treeFig +
+  geom_point2(aes(subset = node %in% ansGauss$mlAN), 
+              color = &quot;red&quot;)</code></pre>
+<div class="alert alert-warning">
+<p>
+<strong>Warning:</strong> The above code chunk cached its results, but it won’t be re-run if previous chunks it depends on are updated. If you need to use caching, it is highly recommended to also set <code>knitr::opts_chunk$set(autodep = TRUE)</code> at the top of the file (in a chunk that is not cached). Alternatively, you can customize the option <code>dependson</code> for each individual chunk that is cached. Using either <code>autodep</code> or <code>dependson</code> will remove this warning. See the <a href="https://yihui.name/knitr/options/#cache"
+>knitr cache options</a> for more details.
+</p>
+</div>
+</div>
+<div id="truth-vs-methods" class="section level1">
+<h1>Truth vs methods</h1>
+<pre class="r"><code>plot_grid(fig, 
+          fig_seg + theme(legend.position = &quot;none&quot;), 
+          fig_climb, f_5, f_10, f_NULL, 
+          nrow = 1, rel_widths = c(0.28, rep(0.145, 5)),
+          labels = c(&quot;&quot;, &quot;fig_seg&quot;, &quot;treeclimbR&quot;, &quot;nf = phyfact_5&quot;,
+                      &quot;nf = phyfact_10&quot;, &quot;nf = phyfact_NULL&quot;), 
+          label_size = 9)</code></pre>
+<p><img src="figure/SS.Rmd/unnamed-chunk-9-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 3.6.1 (2019-07-05)
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+Running under: macOS Mojave 10.14.4
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] parallel  stats4    stats     graphics  grDevices utils     datasets 
+[8] methods   base     
+
+other attached packages:
+ [1] treeSeg_0.1                    stepR_2.0-4                   
+ [3] phylofactor_0.0.1              Matrix_1.2-17                 
+ [5] data.table_1.12.6              magrittr_1.5                  
+ [7] cowplot_1.0.0                  ggnewscale_0.4.0              
+ [9] TreeHeatmap_0.1.0              ape_5.3                       
+[11] treeclimbR_0.1.1               TreeSummarizedExperiment_1.3.0
+[13] SingleCellExperiment_1.8.0     SummarizedExperiment_1.16.0   
+[15] DelayedArray_0.12.0            BiocParallel_1.20.0           
+[17] matrixStats_0.55.0             Biobase_2.46.0                
+[19] GenomicRanges_1.38.0           GenomeInfoDb_1.22.0           
+[21] IRanges_2.20.0                 S4Vectors_0.24.0              
+[23] BiocGenerics_0.32.0            dplyr_0.8.5                   
+[25] ggtree_2.1.6                   gganimate_1.0.4               
+[27] ggplot2_3.3.0                 
+
+loaded via a namespace (and not attached):
+  [1] backports_1.1.6             circlize_0.4.8             
+  [3] diffcyt_1.6.1               workflowr_1.5.0            
+  [5] plyr_1.8.5                  igraph_1.2.4.1             
+  [7] ConsensusClusterPlus_1.50.0 lazyeval_0.2.2             
+  [9] splines_3.6.1               flowCore_1.52.0            
+ [11] fda_2.4.8                   TH.data_1.0-10             
+ [13] digest_0.6.25               htmltools_0.4.0            
+ [15] viridis_0.5.1               fansi_0.4.1                
+ [17] CytoML_1.12.0               cluster_2.1.0              
+ [19] ks_1.11.6                   limma_3.42.0               
+ [21] ComplexHeatmap_2.2.0        RcppParallel_4.4.4         
+ [23] R.utils_2.9.0               sandwich_2.5-1             
+ [25] flowWorkspace_3.34.0        prettyunits_1.1.1          
+ [27] colorspace_1.4-1            rrcov_1.4-7                
+ [29] xfun_0.11                   crayon_1.3.4               
+ [31] RCurl_1.95-4.12             jsonlite_1.6.1             
+ [33] hexbin_1.28.0               graph_1.64.0               
+ [35] lme4_1.1-21                 dirmult_0.1.3-4            
+ [37] survival_2.44-1.1           zoo_1.8-6                  
+ [39] glue_1.4.0                  flowClust_3.24.0           
+ [41] gtable_0.3.0                zlibbioc_1.32.0            
+ [43] XVector_0.26.0              GetoptLong_0.1.7           
+ [45] ggcyto_1.14.0               IDPmisc_1.1.19             
+ [47] Rgraphviz_2.30.0            shape_1.4.4                
+ [49] DEoptimR_1.0-8              scales_1.1.0               
+ [51] mvtnorm_1.0-11              edgeR_3.28.0               
+ [53] Rcpp_1.0.4                  viridisLite_0.3.0          
+ [55] progress_1.2.2              clue_0.3-57                
+ [57] tidytree_0.3.3.991          openCyto_1.24.0            
+ [59] mclust_5.4.5                FlowSOM_1.18.0             
+ [61] tsne_0.1-3                  RColorBrewer_1.1-2         
+ [63] ellipsis_0.3.0              pkgconfig_2.0.3            
+ [65] XML_3.98-1.20               R.methodsS3_1.7.1          
+ [67] farver_2.0.3                flowViz_1.50.0             
+ [69] locfit_1.5-9.1              labeling_0.3               
+ [71] reshape2_1.4.3              flowStats_3.44.0           
+ [73] tidyselect_1.0.0            rlang_0.4.5                
+ [75] later_1.0.0                 munsell_0.5.0              
+ [77] tools_3.6.1                 cli_2.0.2                  
+ [79] gifski_0.8.6                evaluate_0.14              
+ [81] stringr_1.4.0               yaml_2.2.0                 
+ [83] knitr_1.26                  fs_1.3.1                   
+ [85] robustbase_0.93-5           purrr_0.3.3                
+ [87] RBGL_1.62.1                 nlme_3.1-142               
+ [89] whisker_0.4                 R.oo_1.23.0                
+ [91] aplot_0.0.4.991             compiler_3.6.1             
+ [93] png_0.1-7                   treeio_1.11.3              
+ [95] tibble_3.0.0                tweenr_1.0.1               
+ [97] pcaPP_1.9-73                stringi_1.4.6              
+ [99] lattice_0.20-38             nloptr_1.2.1               
+[101] vctrs_0.2.4                 pillar_1.4.3               
+[103] lifecycle_0.2.0             BiocManager_1.30.10        
+[105] GlobalOptions_0.1.1         bitops_1.0-6               
+[107] corpcor_1.6.9               httpuv_1.5.2               
+[109] patchwork_1.0.0             R6_2.4.1                   
+[111] latticeExtra_0.6-28         promises_1.1.0             
+[113] KernSmooth_2.23-15          gridExtra_2.3              
+[115] codetools_0.2-16            boot_1.3-23                
+[117] MASS_7.3-51.4               gtools_3.8.1               
+[119] assertthat_0.2.1            rprojroot_1.3-2            
+[121] rjson_0.2.20                withr_2.1.2                
+[123] mnormt_1.5-5                multcomp_1.4-10            
+[125] GenomeInfoDbData_1.2.2      hms_0.5.2                  
+[127] ncdfFlow_2.32.0             grid_3.6.1                 
+[129] minqa_1.2.4                 tidyr_1.0.2                
+[131] rmarkdown_1.17              rvcheck_0.1.8              
+[133] git2r_0.26.1                base64enc_0.1-3            
+[135] ellipse_0.4.1              </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
